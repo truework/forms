@@ -1,16 +1,10 @@
-# Truework UI
+# @truework/forms ![npm](https://img.shields.io/npm/v/@truework/forms) [![](https://badgen.net/bundlephobia/minzip/@truework/forms)](https://bundlephobia.com/result?p=@truework/forms)
 
-Truework's design system. Built with
-[styled-components](https://styled-components.com/),
-[styled-system](https://styled-system.com/), and
-[react-feather](https://github.com/feathericons/react-feather).
+[Truework's](https://www.truework.com) form elements UI toolkit.
 
-- [`@truework/ui`](https://github.com/truework/ui/tree/master/packages/ui)
-- [`@truework/forms`](https://github.com/truework/ui/tree/master/packages/forms)
-
-## Getting started
-
-Refer to the individual [packages](https://github.com/truework/ui/tree/master/packages) for docs.
+```bash
+npm i @truework/forms --save
+```
 
 ### License
 

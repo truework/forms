@@ -1,20 +1,20 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { get } from 'lodash';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import { Span, H5, Icon } from '@truework/ui';
+import * as React from 'react'
+import styled from 'styled-components'
+import { get } from 'lodash'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import { Span, H5, Icon } from '@truework/ui'
 
 export type CheckboxProps = {
-  name: string;
-  checked?: boolean;
-  hasError?: boolean;
-  disabled?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  name: string
+  checked?: boolean
+  hasError?: boolean
+  disabled?: boolean
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 export type CheckboxFieldProps = { name: string } & CheckboxProps &
-  Pick<FieldConfig, 'validate'>;
+  Pick<FieldConfig, 'validate'>
 
-const StyledIcon = styled(Icon)``;
+const StyledIcon = styled(Icon)``
 
 const Check = styled.div<{ checked?: boolean }>(
   ({ theme, checked }) => `
@@ -50,7 +50,7 @@ const Check = styled.div<{ checked?: boolean }>(
       transform: scale(0);
     }
   `
-);
+)
 
 const Label = styled(H5)(
   ({ theme }) => `
@@ -59,7 +59,7 @@ const Label = styled(H5)(
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.ease};
   `
-);
+)
 
 const Input = styled.input<CheckboxProps>(
   ({ theme, hasError }) => `
@@ -99,7 +99,7 @@ const Input = styled.input<CheckboxProps>(
         : ``
     }
   `
-);
+)
 
 const CheckboxButton = styled.label<{ disabled?: boolean }>(
   ({ theme, disabled }) => `
@@ -128,7 +128,7 @@ const CheckboxButton = styled.label<{ disabled?: boolean }>(
       `
     }
   `
-);
+)
 
 export const CheckboxGroup = styled.div(
   ({ theme }) => `
@@ -153,7 +153,7 @@ export const CheckboxGroup = styled.div(
       border-bottom-right-radius: 4px;
     }
   `
-);
+)
 
 export function Checkbox ({
   children,
@@ -186,13 +186,13 @@ export function Checkbox ({
         style={{
           transitionProperty: 'color',
           transitionDuration: '150ms',
-          transitionTimingFunction: 'ease-in-out',
+          transitionTimingFunction: 'ease-in-out'
         }}
       >
         {children}
       </Span>
     </CheckboxButton>
-  );
+  )
 }
 
 export function CheckboxField ({
@@ -205,7 +205,7 @@ export function CheckboxField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <Checkbox
@@ -214,16 +214,16 @@ export function CheckboxField ({
             checked={Boolean(field.value)}
             hasError={hasError}
             onChange={e => {
-              field.onChange(e);
-              if (onChange) onChange(e);
+              field.onChange(e)
+              if (onChange) onChange(e)
             }}
             onBlur={e => {
-              field.onBlur(e);
-              if (onBlur) onBlur(e);
+              field.onBlur(e)
+              if (onBlur) onBlur(e)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }

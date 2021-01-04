@@ -1,39 +1,39 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { get } from 'lodash';
-import { Field, FieldProps, FieldConfig } from 'formik';
+import * as React from 'react'
+import styled from 'styled-components'
+import { get } from 'lodash'
+import { Field, FieldProps, FieldConfig } from 'formik'
 import {
   useSelect,
   ItemConfig,
   Item as ItemProps,
   OnSelect,
-  OnRemove,
-} from 'use-drop';
-import { Box, Span, Icon } from '@truework/ui';
+  OnRemove
+} from 'use-drop'
+import { Box, Span, Icon } from '@truework/ui'
 
-import { Label } from './Label';
+import { Label } from './Label'
 
 export type DropdownProps = {
-  value?: string;
-  placeholder?: string;
-  label?: string;
-  items: ItemConfig[];
-  hasError?: boolean;
-  disabled?: boolean;
-  onSelect?: OnSelect;
-  onRemove?: OnRemove;
-};
+  value?: string
+  placeholder?: string
+  label?: string
+  items: ItemConfig[]
+  hasError?: boolean
+  disabled?: boolean
+  onSelect?: OnSelect
+  onRemove?: OnRemove
+}
 
 export type DropdownFieldProps = DropdownProps &
   Pick<FieldConfig, 'validate'> & {
-    name: string;
-    label: string;
-    disabled?: boolean;
-  };
+    name: string
+    label: string
+    disabled?: boolean
+  }
 
 export type DropdownFieldWithLabelProps = {
-  label: string;
-} & DropdownFieldProps;
+  label: string
+} & DropdownFieldProps
 
 const ItemOuter = styled(Box)<Partial<ItemProps>>(
   ({ theme, selected, highlighted }) => `
@@ -56,19 +56,19 @@ const ItemOuter = styled(Box)<Partial<ItemProps>>(
     background: ${theme.colors.background};
   }
 `
-);
+)
 
 export function Item ({
   children,
   ...props
 }: Partial<ItemProps> & {
-  children: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[]
 }) {
   return (
     <ItemOuter as='li' {...props}>
       {children}
     </ItemOuter>
-  );
+  )
 }
 
 export const Body = React.forwardRef(
@@ -86,16 +86,16 @@ export const Body = React.forwardRef(
       >
         {children}
       </Box>
-    );
+    )
   }
-);
+)
 
-Body.displayName = 'Body';
+Body.displayName = 'Body'
 
 const ControlOuter = styled.button<{
-  isActive?: boolean;
-  hasError?: boolean;
-  disabled?: boolean;
+  isActive?: boolean
+  hasError?: boolean
+  disabled?: boolean
 }>(
   ({ theme, isActive, hasError, disabled }) => `
   display: block;
@@ -169,9 +169,9 @@ const ControlOuter = styled.button<{
       : ``
   }
 `
-);
+)
 
-ControlOuter.displayName = 'ControlOuter';
+ControlOuter.displayName = 'ControlOuter'
 
 export const Control = React.forwardRef(
   (
@@ -181,9 +181,9 @@ export const Control = React.forwardRef(
       hasError,
       ...props
     }: Partial<React.HTMLAttributes<HTMLButtonElement>> & {
-      isActive?: boolean;
-      hasError?: boolean;
-      disabled?: boolean;
+      isActive?: boolean
+      hasError?: boolean
+      disabled?: boolean
     },
     ref
   ) => {
@@ -209,7 +209,7 @@ export const Control = React.forwardRef(
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
                 overflow: 'hidden',
-                letterSpacing: '0.6px',
+                letterSpacing: '0.6px'
               }}
             >
               {children}
@@ -249,11 +249,11 @@ export const Control = React.forwardRef(
           transitionTimingFunction='ease'
         />
       </div>
-    );
+    )
   }
-);
+)
 
-Control.displayName = 'Control';
+Control.displayName = 'Control'
 
 export function Dropdown ({
   value,
@@ -263,34 +263,34 @@ export function Dropdown ({
   hasError,
   disabled,
   onSelect,
-  onRemove,
+  onRemove
 }: DropdownProps) {
   const [cta, ctaSet] = React.useState(
     get(items.filter(i => i.value === value)[0], 'label') ||
       placeholder ||
       'Please select'
-  );
+  )
 
   const {
     id,
     items: _items,
     isOpen,
     getControlProps,
-    getDropProps,
+    getDropProps
   } = useSelect({
     items: items.map(i => ({
       ...i,
-      selected: i.value === value,
+      selected: i.value === value
     })),
     onSelect (item) {
-      ctaSet(item.label);
-      if (onSelect) onSelect(item);
+      ctaSet(item.label)
+      if (onSelect) onSelect(item)
     },
     onRemove (item) {
-      ctaSet('Please select');
-      if (onRemove) onRemove(item);
-    },
-  });
+      ctaSet('Please select')
+      if (onRemove) onRemove(item)
+    }
+  })
 
   return (
     <Box>
@@ -317,7 +317,7 @@ export function Dropdown ({
             {...getDropProps()}
             style={{
               maxHeight: '240px',
-              overflow: 'auto',
+              overflow: 'auto'
             }}
           >
             {_items.map(i => (
@@ -334,7 +334,7 @@ export function Dropdown ({
         </Box>
       )}
     </Box>
-  );
+  )
 }
 
 export function DropdownField ({
@@ -345,21 +345,21 @@ export function DropdownField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(form.errors && form.errors[field.name]);
+        const hasError = Boolean(form.errors && form.errors[field.name])
 
         return (
           <Dropdown
             {...rest}
             hasError={hasError}
             onSelect={item => {
-              form.setFieldValue(field.name, item.value);
-              if (rest.onSelect) rest.onSelect(item);
+              form.setFieldValue(field.name, item.value)
+              if (rest.onSelect) rest.onSelect(item)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function DropdownFieldWithLabel (props: DropdownFieldProps) {
@@ -368,5 +368,5 @@ export function DropdownFieldWithLabel (props: DropdownFieldProps) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <DropdownField {...props} />
     </>
-  );
+  )
 }

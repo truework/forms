@@ -1,22 +1,22 @@
-import * as React from 'react';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import styled from 'styled-components';
-import { get } from 'lodash';
-import { Box } from '@truework/ui';
+import * as React from 'react'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import styled from 'styled-components'
+import { get } from 'lodash'
+import { Box } from '@truework/ui'
 
-import { Label } from './Label';
+import { Label } from './Label'
 
 export type TextareaProps = {
-  hasValue?: boolean;
-  hasError?: boolean;
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+  hasValue?: boolean
+  hasError?: boolean
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
 export type TextareaFieldProps = { name: string } & TextareaProps &
-  Pick<FieldConfig, 'validate'>;
+  Pick<FieldConfig, 'validate'>
 
 export type TextareaFieldWithLabelProps = {
-  label: string;
-} & TextareaFieldProps;
+  label: string
+} & TextareaFieldProps
 
 const TextareaElement = styled.textarea<TextareaProps>(
   ({ theme, hasValue, hasError }) => `
@@ -81,12 +81,12 @@ const TextareaElement = styled.textarea<TextareaProps>(
     }
   }
 `
-);
+)
 
-TextareaElement.displayName = 'TextareaElement';
+TextareaElement.displayName = 'TextareaElement'
 TextareaElement.defaultProps = {
-  rows: 4,
-};
+  rows: 4
+}
 
 export const Textarea = React.forwardRef(
   (
@@ -128,9 +128,9 @@ export const Textarea = React.forwardRef(
           transitionTimingFunction='ease'
         />
       </Box>
-    );
+    )
   }
-);
+)
 
 export function TextareaField ({
   name,
@@ -142,7 +142,7 @@ export function TextareaField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <Textarea
@@ -150,18 +150,18 @@ export function TextareaField ({
             {...field}
             hasError={hasError}
             onChange={e => {
-              field.onChange(e);
-              if (onChange) onChange(e);
+              field.onChange(e)
+              if (onChange) onChange(e)
             }}
             onBlur={e => {
-              field.onBlur(e);
-              if (onBlur) onBlur(e);
+              field.onBlur(e)
+              if (onBlur) onBlur(e)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function TextareaFieldWithLabel (props: TextareaFieldWithLabelProps) {
@@ -170,5 +170,5 @@ export function TextareaFieldWithLabel (props: TextareaFieldWithLabelProps) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <TextareaField {...props} />
     </>
-  );
+  )
 }

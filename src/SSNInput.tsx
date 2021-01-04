@@ -1,45 +1,45 @@
-import * as React from 'react';
-import { Field, FieldProps, FieldInputProps } from 'formik';
-import { get } from 'lodash';
-import { clean, mask, format } from 'parse-ssn';
+import * as React from 'react'
+import { Field, FieldProps, FieldInputProps } from 'formik'
+import { get } from 'lodash'
+import { clean, mask, format } from 'parse-ssn'
 
 import {
   Input,
   InputProps,
   InputFieldProps,
-  InputFieldWithLabelProps,
-} from './Input';
-import { Label } from './Label';
+  InputFieldWithLabelProps
+} from './Input'
+import { Label } from './Label'
 
 export type SSNProps = {
-  onUpdate?(ssn: string): void;
-  masker?: string;
-  separator?: string;
-};
+  onUpdate?(ssn: string): void
+  masker?: string
+  separator?: string
+}
 export type SSNInputProps = InputProps &
   SSNProps &
-  Partial<Pick<FieldInputProps<string>, 'value'>>;
-export type SSNInputFieldProps = InputFieldProps & SSNProps;
-export type SSNInputFieldWithLabelProps = InputFieldWithLabelProps & SSNProps;
+  Partial<Pick<FieldInputProps<string>, 'value'>>
+export type SSNInputFieldProps = InputFieldProps & SSNProps
+export type SSNInputFieldWithLabelProps = InputFieldWithLabelProps & SSNProps
 
 export function SSNInput (props: SSNInputProps) {
-  const { value = '', masker = '*', separator = '-' } = props;
+  const { value = '', masker = '*', separator = '-' } = props
 
   // if initial value is masked, reset to empty string
   const initialValue = new RegExp(`[^0-9${separator}]`).test(value)
     ? ''
-    : clean(value, masker);
-  const formattedInitialValue = format(mask(initialValue, masker), separator);
+    : clean(value, masker)
+  const formattedInitialValue = format(mask(initialValue, masker), separator)
 
-  const [raw, setRaw] = React.useState(initialValue);
-  const [formatted, setFormatted] = React.useState(formattedInitialValue);
+  const [raw, setRaw] = React.useState(initialValue)
+  const [formatted, setFormatted] = React.useState(formattedInitialValue)
 
   const onChange = React.useCallback(
     e => {
-      e.persist();
+      e.persist()
 
-      const inputValue = e.target.value;
-      const nextChar = inputValue.slice(-1);
+      const inputValue = e.target.value
+      const nextChar = inputValue.slice(-1)
 
       // if a user types a letter, the last character is a formatting
       // character, or we already have a full SSN, just ignore
@@ -47,10 +47,10 @@ export function SSNInput (props: SSNInputProps) {
         new RegExp(`[^0-9${separator}${masker}]`).test(nextChar) ||
         inputValue.length > 11
       )
-        return;
+        return
 
-      const cleanedInputValue = clean(inputValue, masker); // masked, no - format
-      const rawSSN = clean(raw); // no formatting, just numbers
+      const cleanedInputValue = clean(inputValue, masker) // masked, no - format
+      const rawSSN = clean(raw) // no formatting, just numbers
 
       // if user deleted a character, remove, otherwise, append
       const next =
@@ -58,25 +58,25 @@ export function SSNInput (props: SSNInputProps) {
           ? rawSSN.slice(0, cleanedInputValue.length)
           : new RegExp(`[${separator}${masker}]`).test(nextChar)
           ? rawSSN
-          : rawSSN + cleanedInputValue.slice(-1);
+          : rawSSN + cleanedInputValue.slice(-1)
 
-      setRaw(next);
-      setFormatted(format(mask(next, masker), separator));
+      setRaw(next)
+      setFormatted(format(mask(next, masker), separator))
     },
     [raw, setRaw, formatted, setFormatted]
-  );
+  )
 
   const resetCursor = React.useCallback(e => {
-    e.persist();
+    e.persist()
 
-    const len = e.target.value.length;
+    const len = e.target.value.length
 
-    e.target.setSelectionRange(len, len);
-  }, []);
+    e.target.setSelectionRange(len, len)
+  }, [])
 
   React.useEffect(() => {
-    props.onUpdate && props.onUpdate(raw);
-  }, [raw]);
+    props.onUpdate && props.onUpdate(raw)
+  }, [raw])
 
   return (
     <Input
@@ -88,7 +88,7 @@ export function SSNInput (props: SSNInputProps) {
       onKeyDown={resetCursor}
       onClick={resetCursor}
     />
-  );
+  )
 }
 
 export function SSNInputField ({
@@ -99,7 +99,7 @@ export function SSNInputField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <SSNInput
@@ -107,13 +107,13 @@ export function SSNInputField ({
             {...field}
             hasError={hasError}
             onUpdate={ssn => {
-              form.setFieldValue(name, ssn);
+              form.setFieldValue(name, ssn)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function SSNInputFieldWithLabel (props: SSNInputFieldWithLabelProps) {
@@ -122,5 +122,5 @@ export function SSNInputFieldWithLabel (props: SSNInputFieldWithLabelProps) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <SSNInputField {...props} />
     </>
-  );
+  )
 }

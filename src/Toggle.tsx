@@ -1,16 +1,16 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import { Icon } from '@truework/ui';
+import * as React from 'react'
+import styled from 'styled-components'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import { Icon } from '@truework/ui'
 
 export type ToggleProps = {
-  label: string;
-  name: string;
-  checked?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  label: string
+  name: string
+  checked?: boolean
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 export type ToggleFieldProps = { name: string } & ToggleProps &
-  Pick<FieldConfig, 'validate'>;
+  Pick<FieldConfig, 'validate'>
 
 export const hidden = `
   border: 0;
@@ -23,7 +23,7 @@ export const hidden = `
   position: absolute;
   whitespace: nowrap;
   wordwrap: normal;
-`;
+`
 
 const PillButton = styled.div(
   ({ theme }) => `
@@ -43,7 +43,7 @@ const PillButton = styled.div(
   transition-duration: ${theme.transitionDurations.fast};
   transition-timing-function: ${theme.transitionTimingFunctions.natural};
 `
-);
+)
 
 const Pill = styled.div(
   ({ theme }) => `
@@ -58,7 +58,7 @@ const Pill = styled.div(
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.natural};
   `
-);
+)
 
 const Target = styled.label(
   ({ theme }) => `
@@ -72,7 +72,7 @@ const Target = styled.label(
       }
     }
   `
-);
+)
 
 const Input = styled.input(
   ({ theme }) => `
@@ -97,11 +97,11 @@ const Input = styled.input(
       }
     }
   `
-);
+)
 
 const Label = styled.span`
   ${hidden}
-`;
+`
 
 export function Toggle ({
   label, // for a11y
@@ -132,7 +132,7 @@ export function Toggle ({
             right='0'
             m='auto'
             style={{
-              strokeWidth: '2px',
+              strokeWidth: '2px'
             }}
           />
         </PillButton>
@@ -140,7 +140,7 @@ export function Toggle ({
 
       <Label>{label}</Label>
     </Target>
-  );
+  )
 }
 
 export function ToggleField ({ label, name, validate }: ToggleFieldProps) {
@@ -149,8 +149,8 @@ export function ToggleField ({ label, name, validate }: ToggleFieldProps) {
       {({ field }: FieldProps) => {
         return (
           <Toggle label={label} {...field} checked={Boolean(field.value)} />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }

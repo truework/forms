@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { ErrorMessage as FormikErrorMessage } from 'formik';
-import { Span } from '@truework/ui';
+import * as React from 'react'
+import { ErrorMessage as FormikErrorMessage } from 'formik'
+import { Span } from '@truework/ui'
 
 export function ErrorMessage ({ name }: { name: string }) {
   return (
@@ -12,5 +12,5 @@ export function ErrorMessage ({ name }: { name: string }) {
         </Span>
       )}
     />
-  );
+  )
 }

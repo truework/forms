@@ -1,20 +1,20 @@
 /* eslint-disable */
-import * as React from 'react';
-import { storiesOf } from '@storybook/react';
-import { Box, Span, Gutter, Icon, H5, Button } from '@truework/ui';
-import { Formik, Form } from 'formik';
+import * as React from 'react'
+import { storiesOf } from '@storybook/react'
+import { Box, Span, Gutter, Icon, H5, Button } from '@truework/ui'
+import { Formik, Form } from 'formik'
 
-import { Label } from './Label';
-import { SubGroup } from './SubGroup';
-import { Input, InputFieldWithLabel } from './Input';
-import { Select, SelectFieldWithLabel } from './Select';
-import { Textarea, TextareaFieldWithLabel } from './Textarea';
-import { Checkbox, CheckboxField, CheckboxGroup } from './Checkbox';
-import { Radio, RadioFieldWithLabel } from './Radio';
-import { Toggle, ToggleField } from './Toggle';
-import { DateInput, DateInputFieldWithLabel } from './DateInput';
-import { Dropdown, DropdownFieldWithLabel } from './Dropdown';
-import { SSNInput, SSNInputFieldWithLabel } from './SSNInput';
+import { Label } from './Label'
+import { SubGroup } from './SubGroup'
+import { Input, InputFieldWithLabel } from './Input'
+import { Select, SelectFieldWithLabel } from './Select'
+import { Textarea, TextareaFieldWithLabel } from './Textarea'
+import { Checkbox, CheckboxField, CheckboxGroup } from './Checkbox'
+import { Radio, RadioFieldWithLabel } from './Radio'
+import { Toggle, ToggleField } from './Toggle'
+import { DateInput, DateInputFieldWithLabel } from './DateInput'
+import { Dropdown, DropdownFieldWithLabel } from './Dropdown'
+import { SSNInput, SSNInputFieldWithLabel } from './SSNInput'
 
 storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
@@ -27,7 +27,7 @@ storiesOf('Base', module).add('SSN', () => (
       />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Input', () => (
   <Gutter withVertical>
@@ -97,7 +97,7 @@ storiesOf('Base', module).add('Input', () => (
       />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Select', () => (
   <Gutter withVertical>
@@ -107,7 +107,7 @@ storiesOf('Base', module).add('Select', () => (
         {[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ].map(opt => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
@@ -121,7 +121,7 @@ storiesOf('Base', module).add('Select', () => (
         {[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ].map(opt => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
@@ -135,7 +135,7 @@ storiesOf('Base', module).add('Select', () => (
         {[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ].map(opt => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
@@ -149,7 +149,7 @@ storiesOf('Base', module).add('Select', () => (
         {[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ].map(opt => (
           <option key={opt.value} value={opt.value}>
             {opt.label}
@@ -158,7 +158,7 @@ storiesOf('Base', module).add('Select', () => (
       </Select>
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Textarea', () => (
   <Gutter withVertical>
@@ -175,7 +175,7 @@ storiesOf('Base', module).add('Textarea', () => (
       <Textarea name='a' placeholder='Textarea' hasError />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Checkbox', () => (
   <Gutter withVertical>
@@ -207,7 +207,7 @@ storiesOf('Base', module).add('Checkbox', () => (
       </CheckboxGroup>
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Radio', () => (
   <Gutter withVertical>
@@ -218,7 +218,7 @@ storiesOf('Base', module).add('Radio', () => (
       <Radio name='b' value='b' checked label='Radio' />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Toggle', () => (
   <Gutter withVertical>
@@ -231,7 +231,7 @@ storiesOf('Base', module).add('Toggle', () => (
       <H5 ml='xs'>Toggle</H5>
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('DateInput', () => (
   <Gutter withVertical>
@@ -240,7 +240,7 @@ storiesOf('Base', module).add('DateInput', () => (
       <DateInput name='date' label='Date' onUpdate={() => {}} />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Base', module).add('Dropdown', () => (
   <Gutter withVertical>
@@ -250,7 +250,7 @@ storiesOf('Base', module).add('Dropdown', () => (
         items={[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ]}
       />
     </Box>
@@ -261,7 +261,7 @@ storiesOf('Base', module).add('Dropdown', () => (
         items={[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ]}
       />
     </Box>
@@ -272,12 +272,12 @@ storiesOf('Base', module).add('Dropdown', () => (
         items={[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' },
+          { value: 'three', label: 'Three' }
         ]}
       />
     </Box>
   </Gutter>
-));
+))
 
 storiesOf('Formik', module).add('Basic', () => (
   <Gutter withVertical>
@@ -291,7 +291,7 @@ storiesOf('Formik', module).add('Basic', () => (
         toggle: '',
         date: '',
         dropdown: '',
-        ssn: '123-45-1234',
+        ssn: '123-45-1234'
       }}
       onSubmit={values => console.log(values)}
     >
@@ -319,13 +319,13 @@ storiesOf('Formik', module).add('Basic', () => (
             label='Select'
             placeholder='Please select'
             validate={val => {
-              return !val ? 'Required' : undefined;
+              return !val ? 'Required' : undefined
             }}
           >
             {[
               { value: 'one', label: 'One' },
               { value: 'two', label: 'Two' },
-              { value: 'three', label: 'Three' },
+              { value: 'three', label: 'Three' }
             ].map(opt => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
@@ -389,7 +389,7 @@ storiesOf('Formik', module).add('Basic', () => (
             items={[
               { value: 'one', label: 'One' },
               { value: 'two', label: 'Two' },
-              { value: 'three', label: 'Three' },
+              { value: 'three', label: 'Three' }
             ]}
           />
         </Box>
@@ -401,4 +401,4 @@ storiesOf('Formik', module).add('Basic', () => (
       </Form>
     </Formik>
   </Gutter>
-));
+))

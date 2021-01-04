@@ -1,22 +1,22 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { get } from 'lodash';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import { Box, Icon } from '@truework/ui';
+import * as React from 'react'
+import styled from 'styled-components'
+import { get } from 'lodash'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import { Box, Icon } from '@truework/ui'
 
-import { Label } from './Label';
+import { Label } from './Label'
 
 export type SelectProps = {
-  hasValue?: boolean;
-  hasError?: boolean;
-} & React.InputHTMLAttributes<HTMLSelectElement>;
+  hasValue?: boolean
+  hasError?: boolean
+} & React.InputHTMLAttributes<HTMLSelectElement>
 
 export type SelectFieldProps = { name: string } & SelectProps &
-  Pick<FieldConfig, 'validate'>;
+  Pick<FieldConfig, 'validate'>
 
 export type SelectFieldWithLabelProps = {
-  label: string;
-} & SelectFieldProps;
+  label: string
+} & SelectFieldProps
 
 const SelectElement = styled.select<SelectProps>(
   ({ theme, hasValue, hasError }) => `
@@ -81,9 +81,9 @@ const SelectElement = styled.select<SelectProps>(
     }
   }
 `
-);
+)
 
-SelectElement.displayName = 'SelectElement';
+SelectElement.displayName = 'SelectElement'
 
 export const Select = React.forwardRef(
   (
@@ -147,15 +147,15 @@ export const Select = React.forwardRef(
           my='auto'
           pr='sm'
           style={{
-            pointerEvents: 'none',
+            pointerEvents: 'none'
           }}
         >
           <Icon name='ChevronDown' color='secondary' />
         </Box>
       </Box>
-    );
+    )
   }
-);
+)
 
 export function SelectField ({
   name,
@@ -167,7 +167,7 @@ export function SelectField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <Select
@@ -175,18 +175,18 @@ export function SelectField ({
             {...field}
             hasError={hasError}
             onChange={e => {
-              field.onChange(e);
-              if (onChange) onChange(e);
+              field.onChange(e)
+              if (onChange) onChange(e)
             }}
             onBlur={e => {
-              field.onBlur(e);
-              if (onBlur) onBlur(e);
+              field.onBlur(e)
+              if (onBlur) onBlur(e)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function SelectFieldWithLabel (props: SelectFieldWithLabelProps) {
@@ -195,5 +195,5 @@ export function SelectFieldWithLabel (props: SelectFieldWithLabelProps) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <SelectField {...props} />
     </>
-  );
+  )
 }

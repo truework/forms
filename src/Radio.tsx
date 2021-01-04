@@ -1,26 +1,26 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { get } from 'lodash';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import { Box, P } from '@truework/ui';
+import * as React from 'react'
+import styled from 'styled-components'
+import { get } from 'lodash'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import { Box, P } from '@truework/ui'
 
-import { Label } from './Label';
+import { Label } from './Label'
 
 export type RadioProps = {
-  hasError?: boolean;
-  name?: string;
-  checked?: boolean;
-  value: string;
-  description?: React.ReactNode;
-  label: React.ReactNode;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  hasError?: boolean
+  name?: string
+  checked?: boolean
+  value: string
+  description?: React.ReactNode
+  label: React.ReactNode
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 export type RadioFieldProps = {
-  name: string;
+  name: string
 } & Omit<RadioProps, 'checked' | 'value' | 'label'> &
-  Pick<FieldConfig, 'validate'>;
+  Pick<FieldConfig, 'validate'>
 
-export type RadioFieldWithLabelProps = { label: string } & RadioFieldProps;
+export type RadioFieldWithLabelProps = { label: string } & RadioFieldProps
 
 const RadioItemLabel = styled.span(
   ({ theme }) => `
@@ -31,7 +31,7 @@ const RadioItemLabel = styled.span(
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.ease};
   `
-);
+)
 
 const RadioGroup = styled.div<{ hasError: boolean }>(
   ({ theme, hasError }) => `
@@ -60,7 +60,7 @@ const RadioGroup = styled.div<{ hasError: boolean }>(
         : ``
     }
   `
-);
+)
 
 const Check = styled.div<{ checked?: boolean }>(
   ({ theme, checked }) => `
@@ -97,7 +97,7 @@ const Check = styled.div<{ checked?: boolean }>(
       transform: scale(0);
     }
   `
-);
+)
 
 const Input = styled.input(
   ({ theme }) => `
@@ -143,7 +143,7 @@ const Input = styled.input(
       color: ${theme.colors.secondary} !important;
     }
   `
-);
+)
 
 const Bg = styled.span`
   position: absolute;
@@ -153,7 +153,7 @@ const Bg = styled.span`
   right: 0;
   cursor: pointer;
   z-index: 0;
-`;
+`
 
 const RadioButton = styled.label(
   ({ theme }) => `
@@ -172,7 +172,7 @@ const RadioButton = styled.label(
       color: ${theme.colors.primary};
     }
   `
-);
+)
 
 export function Radio ({
   children,
@@ -182,7 +182,7 @@ export function Radio ({
   label,
   ...props
 }: RadioProps) {
-  const id = name + props.value;
+  const id = name + props.value
 
   return (
     <RadioButton htmlFor={id}>
@@ -206,7 +206,7 @@ export function Radio ({
 
       <Bg />
     </RadioButton>
-  );
+  )
 }
 
 export function RadioField ({
@@ -220,7 +220,7 @@ export function RadioField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <RadioGroup hasError={hasError}>
@@ -233,21 +233,21 @@ export function RadioField ({
                   hasError,
                   checked: Boolean(field.value === child.props.value),
                   onChange (e: React.ChangeEvent<HTMLInputElement>) {
-                    field.onChange(e);
-                    if (onChange) onChange(e);
+                    field.onChange(e)
+                    if (onChange) onChange(e)
                   },
                   onBlur (e: React.FocusEvent<HTMLInputElement>) {
-                    field.onBlur(e);
-                    if (onBlur) onBlur(e);
-                  },
-                });
+                    field.onBlur(e)
+                    if (onBlur) onBlur(e)
+                  }
+                })
               }
             )}
           </RadioGroup>
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function RadioFieldWithLabel ({
@@ -259,5 +259,5 @@ export function RadioFieldWithLabel ({
       <Label htmlFor={props.name}>{label}</Label>
       <RadioField {...props} />
     </>
-  );
+  )
 }

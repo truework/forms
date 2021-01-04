@@ -1,26 +1,26 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import { Field, FieldProps, FieldConfig } from 'formik';
-import { get } from 'lodash';
-import { Box } from '@truework/ui';
+import * as React from 'react'
+import styled from 'styled-components'
+import { Field, FieldProps, FieldConfig } from 'formik'
+import { get } from 'lodash'
+import { Box } from '@truework/ui'
 
-import { Label } from './Label';
+import { Label } from './Label'
 
 export type InputProps = {
-  name: string;
-  label?: string;
-  small?: boolean;
-  preTab?: React.ReactNode;
-  postTab?: React.ReactNode;
-  hasValue?: boolean;
-  hasError?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+  name: string
+  label?: string
+  small?: boolean
+  preTab?: React.ReactNode
+  postTab?: React.ReactNode
+  hasValue?: boolean
+  hasError?: boolean
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-export type InputFieldProps = InputProps & Pick<FieldConfig, 'validate'>;
+export type InputFieldProps = InputProps & Pick<FieldConfig, 'validate'>
 
 export type InputFieldWithLabelProps = {
-  label: string;
-} & InputFieldProps;
+  label: string
+} & InputFieldProps
 
 const InputElement = styled.input<InputProps>(
   ({ theme, small, hasValue, hasError }) => `
@@ -92,17 +92,17 @@ const InputElement = styled.input<InputProps>(
       : ``
   }
 `
-);
+)
 
-InputElement.displayName = 'InputElement';
+InputElement.displayName = 'InputElement'
 
 export const Input = React.forwardRef(
   (
     { hasError, preTab, postTab, ...props }: InputProps,
     ref: React.RefObject<HTMLInputElement>
   ) => {
-    const hasPrefix = Boolean(preTab);
-    const tab = preTab || postTab;
+    const hasPrefix = Boolean(preTab)
+    const tab = preTab || postTab
 
     return (
       <Box display='flex' ml='-2px' mr='-2px' p='2px'>
@@ -164,9 +164,9 @@ export const Input = React.forwardRef(
           transitionTimingFunction='ease'
         />
       </Box>
-    );
+    )
   }
-);
+)
 
 export function InputField ({
   name,
@@ -178,7 +178,7 @@ export function InputField ({
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]));
+        const hasError = Boolean(get(form, ['errors', name]))
 
         return (
           <Input
@@ -186,18 +186,18 @@ export function InputField ({
             {...field}
             hasError={hasError}
             onChange={e => {
-              field.onChange(e);
-              if (onChange) onChange(e);
+              field.onChange(e)
+              if (onChange) onChange(e)
             }}
             onBlur={e => {
-              field.onBlur(e);
-              if (onBlur) onBlur(e);
+              field.onBlur(e)
+              if (onBlur) onBlur(e)
             }}
           />
-        );
+        )
       }}
     </Field>
-  );
+  )
 }
 
 export function InputFieldWithLabel (props: InputFieldWithLabelProps) {
@@ -206,5 +206,5 @@ export function InputFieldWithLabel (props: InputFieldWithLabelProps) {
       <Label htmlFor={props.name}>{props.label}</Label>
       <InputField {...props} />
     </>
-  );
+  )
 }

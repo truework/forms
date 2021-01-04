@@ -31,7 +31,9 @@ export type DropdownFieldProps = DropdownProps &
     disabled?: boolean;
   };
 
-export type DropdownFieldWithLabelProps = { label: string } & DropdownFieldProps;
+export type DropdownFieldWithLabelProps = {
+  label: string;
+} & DropdownFieldProps;
 
 const ItemOuter = styled(Box)<Partial<ItemProps>>(
   ({ theme, selected, highlighted }) => `
@@ -56,14 +58,14 @@ const ItemOuter = styled(Box)<Partial<ItemProps>>(
 `
 );
 
-export function Item({
+export function Item ({
   children,
   ...props
 }: Partial<ItemProps> & {
   children: React.ReactNode | React.ReactNode[];
 }) {
   return (
-    <ItemOuter as="li" {...props}>
+    <ItemOuter as='li' {...props}>
       {children}
     </ItemOuter>
   );
@@ -74,12 +76,12 @@ export const Body = React.forwardRef(
     return (
       <Box
         ref={ref as React.RefObject<HTMLUListElement>}
-        as="ul"
-        boxShadow="medium"
+        as='ul'
+        boxShadow='medium'
         borderRadius={2}
-        overflow="auto"
-        width="100%"
-        bg="white"
+        overflow='auto'
+        width='100%'
+        bg='white'
         {...props}
       >
         {children}
@@ -191,17 +193,17 @@ export const Control = React.forwardRef(
           ref={ref as React.RefObject<HTMLButtonElement>}
           isActive={isActive}
           hasError={hasError}
-          type="button"
+          type='button'
           {...props}
         >
           <Span
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
+            display='flex'
+            alignItems='center'
+            justifyContent='space-between'
+            width='100%'
           >
             <Span
-              width="100%"
+              width='100%'
               fontWeight={4}
               style={{
                 whiteSpace: 'nowrap',
@@ -212,39 +214,39 @@ export const Control = React.forwardRef(
             >
               {children}
             </Span>
-            <Icon name="ChevronDown" ml="xs" />
+            <Icon name='ChevronDown' ml='xs' />
           </Span>
         </ControlOuter>
 
         <Box
-          className="__bg"
+          className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
-          position="absolute"
-          top="-2px"
-          bottom="-2px"
-          left="-2px"
-          right="-2px"
+          position='absolute'
+          top='-2px'
+          bottom='-2px'
+          left='-2px'
+          right='-2px'
           zIndex={0}
-          borderRadius="6px"
+          borderRadius='6px'
           opacity={0}
-          transitionProperty="opacity"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          transitionProperty='opacity'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
         <Box
-          className="__border"
-          bg="white"
+          className='__border'
+          bg='white'
           border={['1px solid', hasError ? 'error' : 'outline']}
-          position="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
+          position='absolute'
+          top='0'
+          bottom='0'
+          left='0'
+          right='0'
           zIndex={0}
-          borderRadius="4px"
-          transitionProperty="border-color"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          borderRadius='4px'
+          transitionProperty='border-color'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
       </div>
     );
@@ -253,7 +255,7 @@ export const Control = React.forwardRef(
 
 Control.displayName = 'Control';
 
-export function Dropdown({
+export function Dropdown ({
   value,
   placeholder,
   label,
@@ -264,7 +266,7 @@ export function Dropdown({
   onRemove,
 }: DropdownProps) {
   const [cta, ctaSet] = React.useState(
-    get(items.filter((i) => i.value === value)[0], 'label') ||
+    get(items.filter(i => i.value === value)[0], 'label') ||
       placeholder ||
       'Please select'
   );
@@ -276,15 +278,15 @@ export function Dropdown({
     getControlProps,
     getDropProps,
   } = useSelect({
-    items: items.map((i) => ({
+    items: items.map(i => ({
       ...i,
       selected: i.value === value,
     })),
-    onSelect(item) {
+    onSelect (item) {
       ctaSet(item.label);
       if (onSelect) onSelect(item);
     },
-    onRemove(item) {
+    onRemove (item) {
       ctaSet('Please select');
       if (onRemove) onRemove(item);
     },
@@ -305,10 +307,10 @@ export function Dropdown({
 
       {isOpen && (
         <Box
-          position="absolute"
-          bottom="0"
-          width="100%"
-          transform="translateY(100%) translateY(6px)"
+          position='absolute'
+          bottom='0'
+          width='100%'
+          transform='translateY(100%) translateY(6px)'
           zIndex={1000}
         >
           <Body
@@ -318,7 +320,7 @@ export function Dropdown({
               overflow: 'auto',
             }}
           >
-            {_items.map((i) => (
+            {_items.map(i => (
               <Item
                 key={i.value}
                 selected={i.selected}
@@ -335,7 +337,11 @@ export function Dropdown({
   );
 }
 
-export function DropdownField({ name, validate, ...rest }: DropdownFieldProps) {
+export function DropdownField ({
+  name,
+  validate,
+  ...rest
+}: DropdownFieldProps) {
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
@@ -345,7 +351,7 @@ export function DropdownField({ name, validate, ...rest }: DropdownFieldProps) {
           <Dropdown
             {...rest}
             hasError={hasError}
-            onSelect={(item) => {
+            onSelect={item => {
               form.setFieldValue(field.name, item.value);
               if (rest.onSelect) rest.onSelect(item);
             }}
@@ -356,7 +362,7 @@ export function DropdownField({ name, validate, ...rest }: DropdownFieldProps) {
   );
 }
 
-export function DropdownFieldWithLabel(props: DropdownFieldProps) {
+export function DropdownFieldWithLabel (props: DropdownFieldProps) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

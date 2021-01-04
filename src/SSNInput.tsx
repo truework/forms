@@ -22,7 +22,7 @@ export type SSNInputProps = InputProps &
 export type SSNInputFieldProps = InputFieldProps & SSNProps;
 export type SSNInputFieldWithLabelProps = InputFieldWithLabelProps & SSNProps;
 
-export function SSNInput(props: SSNInputProps) {
+export function SSNInput (props: SSNInputProps) {
   const { value = '', masker = '*', separator = '-' } = props;
 
   // if initial value is masked, reset to empty string
@@ -35,7 +35,7 @@ export function SSNInput(props: SSNInputProps) {
   const [formatted, setFormatted] = React.useState(formattedInitialValue);
 
   const onChange = React.useCallback(
-    (e) => {
+    e => {
       e.persist();
 
       const inputValue = e.target.value;
@@ -66,7 +66,7 @@ export function SSNInput(props: SSNInputProps) {
     [raw, setRaw, formatted, setFormatted]
   );
 
-  const resetCursor = React.useCallback((e) => {
+  const resetCursor = React.useCallback(e => {
     e.persist();
 
     const len = e.target.value.length;
@@ -91,7 +91,11 @@ export function SSNInput(props: SSNInputProps) {
   );
 }
 
-export function SSNInputField({ name, validate, ...rest }: SSNInputFieldProps) {
+export function SSNInputField ({
+  name,
+  validate,
+  ...rest
+}: SSNInputFieldProps) {
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
@@ -102,7 +106,7 @@ export function SSNInputField({ name, validate, ...rest }: SSNInputFieldProps) {
             {...rest}
             {...field}
             hasError={hasError}
-            onUpdate={(ssn) => {
+            onUpdate={ssn => {
               form.setFieldValue(name, ssn);
             }}
           />
@@ -112,7 +116,7 @@ export function SSNInputField({ name, validate, ...rest }: SSNInputFieldProps) {
   );
 }
 
-export function SSNInputFieldWithLabel(props: SSNInputFieldWithLabelProps) {
+export function SSNInputFieldWithLabel (props: SSNInputFieldWithLabelProps) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

@@ -16,8 +16,7 @@ export type InputProps = {
   hasError?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
-export type InputFieldProps = InputProps &
-  Pick<FieldConfig, 'validate'>;
+export type InputFieldProps = InputProps & Pick<FieldConfig, 'validate'>;
 
 export type InputFieldWithLabelProps = {
   label: string;
@@ -106,17 +105,17 @@ export const Input = React.forwardRef(
     const tab = preTab || postTab;
 
     return (
-      <Box display="flex" ml="-2px" mr="-2px" p="2px">
+      <Box display='flex' ml='-2px' mr='-2px' p='2px'>
         <InputElement ref={ref} hasError={hasError} {...props} />
 
         {tab && (
           <Box
-            className="__tab"
-            aria-hidden="true"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            px="sm"
+            className='__tab'
+            aria-hidden='true'
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+            px='sm'
             zIndex={1}
             color={hasError ? 'error' : 'secondary'}
             bg={hasError ? '#FDEBF0' : 'background'}
@@ -126,50 +125,50 @@ export const Input = React.forwardRef(
             borderBottomRightRadius={hasPrefix ? '0' : '4px'}
             border={['1px solid', hasError ? 'error' : 'outline']}
             order={hasPrefix ? -1 : 1}
-            transitionProperty="border-color, color"
-            transitionDuration="fast"
-            transitionTimingFunction="ease"
+            transitionProperty='border-color, color'
+            transitionDuration='fast'
+            transitionTimingFunction='ease'
           >
             {tab}
           </Box>
         )}
 
         <Box
-          className="__bg"
+          className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
-          position="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
+          position='absolute'
+          top='0'
+          bottom='0'
+          left='0'
+          right='0'
           zIndex={0}
-          borderRadius="6px"
+          borderRadius='6px'
           opacity={0}
-          transitionProperty="opacity"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          transitionProperty='opacity'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
         <Box
-          className="__border"
-          bg="white"
+          className='__border'
+          bg='white'
           border={['1px solid', hasError ? 'error' : 'outline']}
-          position="absolute"
-          top="2px"
-          bottom="2px"
-          left="2px"
-          right="2px"
+          position='absolute'
+          top='2px'
+          bottom='2px'
+          left='2px'
+          right='2px'
           zIndex={0}
-          borderRadius="4px"
-          transitionProperty="border-color"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          borderRadius='4px'
+          transitionProperty='border-color'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
       </Box>
     );
   }
 );
 
-export function InputField({
+export function InputField ({
   name,
   validate,
   onChange,
@@ -186,11 +185,11 @@ export function InputField({
             {...rest}
             {...field}
             hasError={hasError}
-            onChange={(e) => {
+            onChange={e => {
               field.onChange(e);
               if (onChange) onChange(e);
             }}
-            onBlur={(e) => {
+            onBlur={e => {
               field.onBlur(e);
               if (onBlur) onBlur(e);
             }}
@@ -201,7 +200,7 @@ export function InputField({
   );
 }
 
-export function InputFieldWithLabel(props: InputFieldWithLabelProps) {
+export function InputFieldWithLabel (props: InputFieldWithLabelProps) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

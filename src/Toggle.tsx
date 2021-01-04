@@ -103,7 +103,7 @@ const Label = styled.span`
   ${hidden}
 `;
 
-export function Toggle({
+export function Toggle ({
   label, // for a11y
   name,
   checked,
@@ -114,7 +114,7 @@ export function Toggle({
       <Input
         id={name}
         name={name}
-        type="checkbox"
+        type='checkbox'
         checked={checked}
         {...props}
       />
@@ -122,15 +122,15 @@ export function Toggle({
       <Pill>
         <PillButton>
           <Icon
-            name="Check"
-            width="12px"
-            height="12px"
-            position="absolute"
-            top="0"
-            bottom="0"
-            left="0"
-            right="0"
-            m="auto"
+            name='Check'
+            width='12px'
+            height='12px'
+            position='absolute'
+            top='0'
+            bottom='0'
+            left='0'
+            right='0'
+            m='auto'
             style={{
               strokeWidth: '2px',
             }}
@@ -143,11 +143,13 @@ export function Toggle({
   );
 }
 
-export function ToggleField({ label, name, validate }: ToggleFieldProps) {
+export function ToggleField ({ label, name, validate }: ToggleFieldProps) {
   return (
     <Field name={name} validate={validate}>
       {({ field }: FieldProps) => {
-        return <Toggle label={label} {...field} checked={Boolean(field.value)} />;
+        return (
+          <Toggle label={label} {...field} checked={Boolean(field.value)} />
+        );
       }}
     </Field>
   );

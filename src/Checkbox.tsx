@@ -24,7 +24,9 @@ const Check = styled.div<{ checked?: boolean }>(
     border-radius: 2px;
     margin-top: 2px;
     margin-right: 8px;
-    border: 1px solid ${checked ? theme.colors.primaryDark : theme.colors.outline};
+    border: 1px solid ${
+      checked ? theme.colors.primaryDark : theme.colors.outline
+    };
     transition-property: background, border-color;
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.ease};
@@ -87,30 +89,36 @@ const Input = styled.input<CheckboxProps>(
       color: ${theme.colors.primary};
     }
 
-    ${hasError ? `
+    ${
+      hasError
+        ? `
       & ~ ${Check} {
         border-color: ${theme.colors.error} !important;
       }
-      ` : ``}
+      `
+        : ``
+    }
   `
 );
 
-const CheckboxButton = styled.label<{disabled?: boolean}>(
+const CheckboxButton = styled.label<{ disabled?: boolean }>(
   ({ theme, disabled }) => `
     display: flex;
     align-items: flex-start;
     width: 100%;
     margin-bottom: 0 !important;
 
-    ${disabled ? `
+    ${
+      disabled
+        ? `
       ${Check} {
         background: ${theme.colors.background};
       }
       ${Span} {
         color: ${theme.colors.placeholder};
       }
-      ` :
       `
+        : `
         &:hover ${Check} {
           border-color: ${theme.colors.primaryDark};
         }
@@ -147,7 +155,7 @@ export const CheckboxGroup = styled.div(
   `
 );
 
-export function Checkbox({
+export function Checkbox ({
   children,
   name,
   checked,
@@ -159,19 +167,19 @@ export function Checkbox({
       <Input
         id={name}
         name={name}
-        type="checkbox"
+        type='checkbox'
         checked={checked}
         disabled={disabled}
         {...props}
       />
 
       <Check checked={checked}>
-        <StyledIcon name="Check" />
+        <StyledIcon name='Check' />
       </Check>
 
       <Span
-        display="block"
-        width="calc(100% - 16px)"
+        display='block'
+        width='calc(100% - 16px)'
         fontSize={1}
         lineHeight={1}
         fontWeight={5}
@@ -187,7 +195,7 @@ export function Checkbox({
   );
 }
 
-export function CheckboxField({
+export function CheckboxField ({
   name,
   validate,
   onChange,

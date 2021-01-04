@@ -91,7 +91,7 @@ export const Select = React.forwardRef(
     ref: React.RefObject<HTMLSelectElement>
   ) => {
     return (
-      <Box ml="-2px" mr="-2px" p="2px">
+      <Box ml='-2px' mr='-2px' p='2px'>
         <SelectElement
           ref={ref}
           hasValue={Boolean(props.value)}
@@ -100,7 +100,7 @@ export const Select = React.forwardRef(
           value={props.value || ''}
         >
           {placeholder && (
-            <option value="" disabled>
+            <option value='' disabled>
               {placeholder}
             </option>
           )}
@@ -108,56 +108,56 @@ export const Select = React.forwardRef(
         </SelectElement>
 
         <Box
-          className="__bg"
+          className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
-          position="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
+          position='absolute'
+          top='0'
+          bottom='0'
+          left='0'
+          right='0'
           zIndex={0}
-          borderRadius="6px"
+          borderRadius='6px'
           opacity={0}
-          transitionProperty="opacity"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          transitionProperty='opacity'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
         <Box
-          className="__border"
-          bg="white"
+          className='__border'
+          bg='white'
           border={['1px solid', hasError ? 'error' : 'outline']}
-          position="absolute"
-          top="2px"
-          bottom="2px"
-          left="2px"
-          right="2px"
+          position='absolute'
+          top='2px'
+          bottom='2px'
+          left='2px'
+          right='2px'
           zIndex={0}
-          borderRadius="4px"
-          transitionProperty="border-color"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          borderRadius='4px'
+          transitionProperty='border-color'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
 
         <Box
-          position="absolute"
-          right="0"
-          top="0"
-          bottom="0"
-          height="16px"
-          my="auto"
-          pr="sm"
+          position='absolute'
+          right='0'
+          top='0'
+          bottom='0'
+          height='16px'
+          my='auto'
+          pr='sm'
           style={{
             pointerEvents: 'none',
           }}
         >
-          <Icon name="ChevronDown" color="secondary" />
+          <Icon name='ChevronDown' color='secondary' />
         </Box>
       </Box>
     );
   }
 );
 
-export function SelectField({
+export function SelectField ({
   name,
   validate,
   onChange,
@@ -174,11 +174,11 @@ export function SelectField({
             {...rest}
             {...field}
             hasError={hasError}
-            onChange={(e) => {
+            onChange={e => {
               field.onChange(e);
               if (onChange) onChange(e);
             }}
-            onBlur={(e) => {
+            onBlur={e => {
               field.onBlur(e);
               if (onBlur) onBlur(e);
             }}
@@ -189,7 +189,7 @@ export function SelectField({
   );
 }
 
-export function SelectFieldWithLabel(props: SelectFieldWithLabelProps) {
+export function SelectFieldWithLabel (props: SelectFieldWithLabelProps) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

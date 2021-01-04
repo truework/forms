@@ -29,64 +29,65 @@ export type DateInputProps = {
   label: string; // required for a11y
   hasError?: boolean;
   onUpdate(date: string): void;
-} & DateValidationOptions & React.InputHTMLAttributes<HTMLSelectElement>;
+} & DateValidationOptions &
+  React.InputHTMLAttributes<HTMLSelectElement>;
 
 export type DateInputFieldProps = Omit<DateInputProps, 'onUpdate'> &
   Pick<FieldConfig, 'validate'>;
 
 const DateInputSelect = styled.select<DateInputSelectProps>(
   ({ theme, hasValue, hasError }) => css`
-  appearance: none;
-  border: none;
-  display: block;
-  position: relative;
-  font-family: ${theme.fonts.roboto};
-  color: ${theme.colors.body};
-  font-size: ${theme.fontSizes[1]};
-  line-height: ${theme.lineHeights[0]};
-  letter-spacing: 0.6px;
-  margin: 0;
-  min-height: 48px;
-  padding: ${theme.space.sm};
-  background: transparent;
-  color: ${hasValue ? theme.colors.body : theme.colors.secondary};
-  cursor: pointer;
-  z-index: 2;
-  transition-property: border-color, color;
-  transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
-
-  &::-ms-expand {
-    display: none;
-  }
-  &:disabled {
-    background: transparent;
-    color: ${props => props.theme.colors.placeholder};
-    cursor: not-allowed;
-    & ~ .__border {
-      background: ${theme.colors.background};
-      cursor: not-allowed;
-    }
-  }
-  &:not(:disabled):active,
-  &:not(:disabled):focus,
-  &:not(:disabled):hover {
-    outline: 0;
+    appearance: none;
+    border: none;
+    display: block;
+    position: relative;
+    font-family: ${theme.fonts.roboto};
     color: ${theme.colors.body};
+    font-size: ${theme.fontSizes[1]};
+    line-height: ${theme.lineHeights[0]};
+    letter-spacing: 0.6px;
+    margin: 0;
+    min-height: 48px;
+    padding: ${theme.space.sm};
+    background: transparent;
+    color: ${hasValue ? theme.colors.body : theme.colors.secondary};
+    cursor: pointer;
+    z-index: 2;
+    transition-property: border-color, color;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
 
-    & ~ .__bg {
-      opacity: 1;
+    &::-ms-expand {
+      display: none;
     }
-    & ~ .__border {
-      border-color: ${hasError ? theme.colors.error : theme.colors.primary};
-
-      div {
-        border-color: ${hasError ? theme.colors.error : theme.colors.primary};
-        color: ${hasError ? theme.colors.error : theme.colors.primary};
+    &:disabled {
+      background: transparent;
+      color: ${props => props.theme.colors.placeholder};
+      cursor: not-allowed;
+      & ~ .__border {
+        background: ${theme.colors.background};
+        cursor: not-allowed;
       }
     }
-  }
-`
+    &:not(:disabled):active,
+    &:not(:disabled):focus,
+    &:not(:disabled):hover {
+      outline: 0;
+      color: ${theme.colors.body};
+
+      & ~ .__bg {
+        opacity: 1;
+      }
+      & ~ .__border {
+        border-color: ${hasError ? theme.colors.error : theme.colors.primary};
+
+        div {
+          border-color: ${hasError ? theme.colors.error : theme.colors.primary};
+          color: ${hasError ? theme.colors.error : theme.colors.primary};
+        }
+      }
+    }
+  `
 );
 
 /**
@@ -98,7 +99,7 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
  * keep that in mind when adjusting the external API, and when adjusting the
  * internal date calculation logic: you may need to convert between the two
  */
-export function DateInput({
+export function DateInput ({
   name,
   label = 'Date',
   disabled,
@@ -132,8 +133,8 @@ export function DateInput({
   }, [month, day, year]);
 
   return (
-    <Box ml="-4px" mr="-4px" p="4px">
-      <Box display="flex" alignItems="center" height="48px" pl="56px">
+    <Box ml='-4px' mr='-4px' p='4px'>
+      <Box display='flex' alignItems='center' height='48px' pl='56px'>
         <DateInputSelect
           ref={monthRef}
           name={`${name}-month`}
@@ -147,7 +148,7 @@ export function DateInput({
           hasValue={Boolean(month)}
           hasError={hasError}
         >
-          <option value="0" disabled selected>
+          <option value='0' disabled selected>
             mm
           </option>
           {times(maxMonth - minMonth + 1, () => '').map((_, i) => {
@@ -160,11 +161,11 @@ export function DateInput({
           })}
         </DateInputSelect>
         <Box
-          height="50%"
-          width="1px"
+          height='50%'
+          width='1px'
           bg={hasError ? 'error' : 'outline'}
           zIndex={2}
-          transform="rotate(10deg)"
+          transform='rotate(10deg)'
         />
         <DateInputSelect
           ref={dayRef}
@@ -179,7 +180,7 @@ export function DateInput({
           hasValue={Boolean(day)}
           hasError={hasError}
         >
-          <option value="0" disabled selected>
+          <option value='0' disabled selected>
             dd
           </option>
           {times(Math.min(maxDay, maxDaysInMonth) - minDay + 1, () => '').map(
@@ -194,11 +195,11 @@ export function DateInput({
           )}
         </DateInputSelect>
         <Box
-          height="50%"
-          width="1px"
+          height='50%'
+          width='1px'
           bg={hasError ? 'error' : 'outline'}
           zIndex={2}
-          transform="rotate(10deg)"
+          transform='rotate(10deg)'
         />
         <DateInputSelect
           ref={yearRef}
@@ -212,7 +213,7 @@ export function DateInput({
           hasValue={Boolean(year)}
           hasError={hasError}
         >
-          <option value="0" disabled selected>
+          <option value='0' disabled selected>
             yyyy
           </option>
           {times(maxYear - minYear + 1, n => minYear + n).map(i => (
@@ -223,56 +224,56 @@ export function DateInput({
         </DateInputSelect>
 
         <Box
-          className="__bg"
+          className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
-          position="absolute"
-          top="-4px"
-          bottom="-4px"
-          left="-4px"
-          right="-4px"
+          position='absolute'
+          top='-4px'
+          bottom='-4px'
+          left='-4px'
+          right='-4px'
           zIndex={0}
-          borderRadius="6px"
+          borderRadius='6px'
           opacity={0}
-          transitionProperty="opacity"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          transitionProperty='opacity'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
         <Box
-          className="__border"
-          bg="white"
+          className='__border'
+          bg='white'
           border={['1px solid', hasError ? 'error' : 'outline']}
-          position="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
+          position='absolute'
+          top='0'
+          bottom='0'
+          left='0'
+          right='0'
           zIndex={0}
-          borderRadius="4px"
-          transitionProperty="border-color"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          borderRadius='4px'
+          transitionProperty='border-color'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         >
           <Box
-            aria-hidden="true"
-            position="absolute"
-            top="0"
-            left="0"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            px="sm"
-            height="100%"
+            aria-hidden='true'
+            position='absolute'
+            top='0'
+            left='0'
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+            px='sm'
+            height='100%'
             zIndex={0}
             color={hasError ? 'error' : 'secondary'}
             bg={hasError ? '#FDEBF0' : 'background'}
-            borderTopLeftRadius="4px"
-            borderBottomLeftRadius="4px"
+            borderTopLeftRadius='4px'
+            borderBottomLeftRadius='4px'
             borderRight={['1px solid', hasError ? 'error' : 'outline']}
-            transitionProperty="border-color, color"
-            transitionDuration="fast"
-            transitionTimingFunction="ease"
+            transitionProperty='border-color, color'
+            transitionDuration='fast'
+            transitionTimingFunction='ease'
           >
-            <Icon name="Calendar" />
+            <Icon name='Calendar' />
           </Box>
         </Box>
       </Box>
@@ -280,7 +281,11 @@ export function DateInput({
   );
 }
 
-export function DateInputField({ name, validate, ...rest }: DateInputFieldProps) {
+export function DateInputField ({
+  name,
+  validate,
+  ...rest
+}: DateInputFieldProps) {
   return (
     <Field name={name} validate={validate}>
       {({ field, form }: FieldProps) => {
@@ -307,7 +312,9 @@ export function DateInputField({ name, validate, ...rest }: DateInputFieldProps)
   );
 }
 
-export function DateInputFieldWithLabel(props: { label: string } & DateInputFieldProps) {
+export function DateInputFieldWithLabel (
+  props: { label: string } & DateInputFieldProps
+) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

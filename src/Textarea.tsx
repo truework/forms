@@ -94,45 +94,45 @@ export const Textarea = React.forwardRef(
     ref: React.RefObject<HTMLTextAreaElement>
   ) => {
     return (
-      <Box ml="-2px" mr="-2px" p="2px">
+      <Box ml='-2px' mr='-2px' p='2px'>
         <TextareaElement ref={ref} hasError={hasError} {...props} />
 
         <Box
-          className="__bg"
+          className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
-          position="absolute"
-          top="0"
-          bottom="0"
-          left="0"
-          right="0"
+          position='absolute'
+          top='0'
+          bottom='0'
+          left='0'
+          right='0'
           zIndex={0}
-          borderRadius="6px"
+          borderRadius='6px'
           opacity={0}
-          transitionProperty="opacity"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          transitionProperty='opacity'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
         <Box
-          className="__border"
-          bg="white"
+          className='__border'
+          bg='white'
           border={['1px solid', hasError ? 'error' : 'outline']}
-          position="absolute"
-          top="2px"
-          bottom="2px"
-          left="2px"
-          right="2px"
+          position='absolute'
+          top='2px'
+          bottom='2px'
+          left='2px'
+          right='2px'
           zIndex={0}
-          borderRadius="4px"
-          transitionProperty="border-color"
-          transitionDuration="fast"
-          transitionTimingFunction="ease"
+          borderRadius='4px'
+          transitionProperty='border-color'
+          transitionDuration='fast'
+          transitionTimingFunction='ease'
         />
       </Box>
     );
   }
 );
 
-export function TextareaField({
+export function TextareaField ({
   name,
   validate,
   onChange,
@@ -149,11 +149,11 @@ export function TextareaField({
             {...rest}
             {...field}
             hasError={hasError}
-            onChange={(e) => {
+            onChange={e => {
               field.onChange(e);
               if (onChange) onChange(e);
             }}
-            onBlur={(e) => {
+            onBlur={e => {
               field.onBlur(e);
               if (onBlur) onBlur(e);
             }}
@@ -164,7 +164,7 @@ export function TextareaField({
   );
 }
 
-export function TextareaFieldWithLabel(props: TextareaFieldWithLabelProps) {
+export function TextareaFieldWithLabel (props: TextareaFieldWithLabelProps) {
   return (
     <>
       <Label htmlFor={props.name}>{props.label}</Label>

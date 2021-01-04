@@ -48,15 +48,17 @@ const RadioGroup = styled.div<{ hasError: boolean }>(
       }
     }
 
-    ${hasError
-      ? `
+    ${
+      hasError
+        ? `
           border-color: ${theme.colors.error} !important;
 
           & ${RadioButton} {
             border-color: ${theme.colors.error} !important;
           }
         `
-      : ``}
+        : ``
+    }
   `
 );
 
@@ -68,7 +70,9 @@ const Check = styled.div<{ checked?: boolean }>(
     border-radius: 100%;
     margin-top: 2px;
     margin-right: 8px;
-    border: 1px solid ${checked ? theme.colors.primaryDark : theme.colors.outline};
+    border: 1px solid ${
+      checked ? theme.colors.primaryDark : theme.colors.outline
+    };
     z-index: 1;
     transition-property: background, border-color;
     transition-duration: ${theme.transitionDurations.fast};
@@ -170,7 +174,7 @@ const RadioButton = styled.label(
   `
 );
 
-export function Radio({
+export function Radio ({
   children,
   name,
   checked,
@@ -182,25 +186,19 @@ export function Radio({
 
   return (
     <RadioButton htmlFor={id}>
-      <Input
-        id={id}
-        name={name}
-        type="radio"
-        checked={checked}
-        {...props}
-      />
+      <Input id={id} name={name} type='radio' checked={checked} {...props} />
 
       <Check checked={checked} />
 
       <Box
-        display="block"
-        position="relative"
+        display='block'
+        position='relative'
         zIndex={1}
-        width="calc(100% - 16px)"
+        width='calc(100% - 16px)'
       >
         {label && <RadioItemLabel>{label}</RadioItemLabel>}
         {description && (
-          <P color="secondary" fontSize={0} fontWeight={4} lineHeight={0}>
+          <P color='secondary' fontSize={0} fontWeight={4} lineHeight={0}>
             {description}
           </P>
         )}
@@ -211,7 +209,7 @@ export function Radio({
   );
 }
 
-export function RadioField({
+export function RadioField ({
   children,
   name,
   validate,
@@ -226,23 +224,25 @@ export function RadioField({
 
         return (
           <RadioGroup hasError={hasError}>
-            {React.Children.toArray(children).map((child: React.ReactElement) => {
-              return React.cloneElement(child, {
-                ...field,
-                ...rest,
-                value: child.props.value,
-                hasError,
-                checked: Boolean(field.value === child.props.value),
-                onChange(e: React.ChangeEvent<HTMLInputElement>) {
-                  field.onChange(e);
-                  if (onChange) onChange(e);
-                },
-                onBlur(e: React.FocusEvent<HTMLInputElement>) {
-                  field.onBlur(e);
-                  if (onBlur) onBlur(e);
-                },
-              });
-            })}
+            {React.Children.toArray(children).map(
+              (child: React.ReactElement) => {
+                return React.cloneElement(child, {
+                  ...field,
+                  ...rest,
+                  value: child.props.value,
+                  hasError,
+                  checked: Boolean(field.value === child.props.value),
+                  onChange (e: React.ChangeEvent<HTMLInputElement>) {
+                    field.onChange(e);
+                    if (onChange) onChange(e);
+                  },
+                  onBlur (e: React.FocusEvent<HTMLInputElement>) {
+                    field.onBlur(e);
+                    if (onBlur) onBlur(e);
+                  },
+                });
+              }
+            )}
           </RadioGroup>
         );
       }}
@@ -250,7 +250,7 @@ export function RadioField({
   );
 }
 
-export function RadioFieldWithLabel({
+export function RadioFieldWithLabel ({
   label,
   ...props
 }: RadioFieldWithLabelProps) {

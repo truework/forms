@@ -48,7 +48,9 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
     letter-spacing: 0.6px;
     margin: 0;
     min-height: 48px;
-    padding: ${theme.space.sm};
+    padding: ${theme.space.sm} 6px;
+    text-align: center;
+    max-width: 33.333333%;
     background: transparent;
     color: ${hasValue ? theme.colors.body : theme.colors.secondary};
     cursor: pointer;

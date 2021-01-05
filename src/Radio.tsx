@@ -24,9 +24,11 @@ export type RadioFieldWithLabelProps = { label: string } & RadioFieldProps
 
 const RadioItemLabel = styled.span(
   ({ theme }) => `
+    display: block;
     font-size: ${theme.fontSizes[1]};
     font-weight: ${theme.fontWeights[5]};
     line-height: ${theme.lineHeights[0]};
+    margin-bottom: ${theme.space.xxs};
     transition-property: color;
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.ease};
@@ -69,7 +71,7 @@ const Check = styled.div<{ checked?: boolean }>(
     height: 16px;
     border-radius: 100%;
     margin-top: 2px;
-    margin-right: 8px;
+    margin-right: 16px;
     border: 1px solid ${
       checked ? theme.colors.primaryDark : theme.colors.outline
     };
@@ -194,7 +196,8 @@ export function Radio ({
         display='block'
         position='relative'
         zIndex={1}
-        width='calc(100% - 16px)'
+        width='calc(100% - 32px)'
+        maxWidth='calc(100% - 32px)'
       >
         {label && <RadioItemLabel>{label}</RadioItemLabel>}
         {description && (

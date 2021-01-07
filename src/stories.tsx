@@ -6,8 +6,8 @@ import { Formik, Form } from 'formik'
 
 import { Label } from './Label'
 import { SubGroup } from './SubGroup'
-import { Input, InputFieldWithLabel } from './Input'
-import { Select, SelectFieldWithLabel } from './Select'
+import { Input, InputField, InputFieldWithLabel } from './Input'
+import { Select, SelectField, SelectFieldWithLabel } from './Select'
 import { Textarea, TextareaFieldWithLabel } from './Textarea'
 import { Checkbox, CheckboxField, CheckboxGroup } from './Checkbox'
 import { Radio, RadioFieldWithLabel } from './Radio'
@@ -146,6 +146,20 @@ storiesOf('Base', module).add('Select', () => (
     <Box mb='med'>
       <Label>Select</Label>
       <Select name='a' placeholder='Please select' hasError>
+        {[
+          { value: 'one', label: 'One' },
+          { value: 'two', label: 'Two' },
+          { value: 'three', label: 'Three' }
+        ].map(opt => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </Select>
+    </Box>
+    <Box mb='med'>
+      <Label>Select</Label>
+      <Select name='a' small>
         {[
           { value: 'one', label: 'One' },
           { value: 'two', label: 'Two' },
@@ -393,6 +407,32 @@ storiesOf('Formik', module).add('Basic', () => (
             ]}
           />
         </Box>
+
+        <Box mb='med' display='flex'>
+          <SelectField
+            small
+            name='select'
+            placeholder='Filter'
+            validate={val => {
+              return !val ? 'Required' : undefined
+            }}
+          >
+            {[
+              { value: 'one', label: 'One' },
+              { value: 'two', label: 'Two' },
+              { value: 'three', label: 'Three' }
+            ].map(opt => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </SelectField>
+
+          <Box ml='sm'>
+            <InputField small name='search' placeholder='Search' />
+          </Box>
+        </Box>
+
         <Box mb='med'>
           <Button type='submit' size='large' appearance='primary'>
             Submit

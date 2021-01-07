@@ -36,7 +36,7 @@ const InputElement = styled.input<InputProps>(
   width: 100%;
   margin: 0;
   min-height: ${small ? '36px' : '48px'};
-  padding: ${small ? '10px' : theme.space.sm};
+  padding: ${small ? '10px 16px' : theme.space.sm};
   background: transparent;
   color: ${hasValue ? theme.colors.body : theme.colors.secondary};
   cursor: pointer;
@@ -90,6 +90,11 @@ const InputElement = styled.input<InputProps>(
     }
     `
       : ``
+  }
+
+  & ~ .__tab svg {
+    max-width: ${small ? '14px' : '16px'};
+    max-height: ${small ? '14px' : '16px'};
   }
 `
 )

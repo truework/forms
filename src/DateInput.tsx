@@ -44,11 +44,12 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
     font-family: ${theme.fonts.roboto};
     color: ${theme.colors.body};
     font-size: ${theme.fontSizes[1]};
+    font-family: ${theme.fonts.mono};
     line-height: ${theme.lineHeights[0]};
     letter-spacing: 0.6px;
     margin: 0;
     min-height: 48px;
-    padding: ${theme.space.sm} 6px;
+    padding: ${theme.space.sm} 8px ${theme.space.sm} 10px;
     text-align: center;
     max-width: 33.333333%;
     background: transparent;

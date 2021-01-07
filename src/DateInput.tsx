@@ -44,11 +44,12 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
     font-family: ${theme.fonts.roboto};
     color: ${theme.colors.body};
     font-size: ${theme.fontSizes[1]};
+    font-family: ${theme.fonts.mono};
     line-height: ${theme.lineHeights[0]};
     letter-spacing: 0.6px;
     margin: 0;
     min-height: 48px;
-    padding: ${theme.space.sm} 6px;
+    padding: ${theme.space.sm} 8px ${theme.space.sm} 10px;
     text-align: center;
     max-width: 33.333333%;
     background: transparent;
@@ -92,6 +93,32 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
   `
 )
 
+const Clear = styled.button(
+  ({ theme }) => css`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 12px;
+    z-index: 1;
+    height: 16px;
+    width: 16px;
+    margin: auto 0;
+    border: 1px solid currentColor;
+    border-radius: 16px;
+    color: ${theme.colors.secondary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transition: opacity ${theme.transitionDurations.fast}
+      ${theme.transitionTimingFunctions.ease};
+
+    &:hover {
+      opacity: 1;
+    }
+  `
+)
+
 /**
  * IMPORTANT
  *
@@ -123,6 +150,7 @@ export function DateInput ({
   const [month, setMonth] = React.useState(initialMonth)
   const [day, setDay] = React.useState(initialDay)
   const [year, setYear] = React.useState(initialYear)
+  const hasValue = Boolean(month || day || year)
 
   const maxDaysInMonth = getLastDayOfMonth({
     year: year || 2020,
@@ -133,6 +161,12 @@ export function DateInput ({
     if (year && month && day)
       onUpdate(`${year}-${zeroPadDate(month)}-${zeroPadDate(day)}`)
   }, [month, day, year])
+
+  const clear = React.useCallback(() => {
+    setMonth(0)
+    setDay(0)
+    setYear(0)
+  }, [setMonth, setDay, setYear])
 
   return (
     <Box ml='-4px' mr='-4px' p='4px'>
@@ -150,7 +184,7 @@ export function DateInput ({
           hasValue={Boolean(month)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             mm
           </option>
           {times(maxMonth - minMonth + 1, () => '').map((_, i) => {
@@ -182,7 +216,7 @@ export function DateInput ({
           hasValue={Boolean(day)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             dd
           </option>
           {times(Math.min(maxDay, maxDaysInMonth) - minDay + 1, () => '').map(
@@ -215,7 +249,7 @@ export function DateInput ({
           hasValue={Boolean(year)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             yyyy
           </option>
           {times(maxYear - minYear + 1, n => minYear + n).map(i => (
@@ -224,6 +258,12 @@ export function DateInput ({
             </option>
           ))}
         </DateInputSelect>
+
+        {(month || day || year) && (
+          <Clear title='Clear' onClick={clear}>
+            <Icon name='X' width='12px' height='12px' />
+          </Clear>
+        )}
 
         <Box
           className='__bg'

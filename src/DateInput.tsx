@@ -182,7 +182,7 @@ export function DateInput ({
           hasValue={Boolean(month)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             mm
           </option>
           {times(maxMonth - minMonth + 1, () => '').map((_, i) => {
@@ -214,7 +214,7 @@ export function DateInput ({
           hasValue={Boolean(day)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             dd
           </option>
           {times(Math.min(maxDay, maxDaysInMonth) - minDay + 1, () => '').map(
@@ -247,7 +247,7 @@ export function DateInput ({
           hasValue={Boolean(year)}
           hasError={hasError}
         >
-          <option value='0' disabled selected>
+          <option value='0' disabled>
             yyyy
           </option>
           {times(maxYear - minYear + 1, n => minYear + n).map(i => (

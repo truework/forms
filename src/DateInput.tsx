@@ -105,15 +105,16 @@ const Clear = styled.button(
     margin: auto 0;
     border: 1px solid currentColor;
     border-radius: 16px;
-    color: ${theme.colors.outline};
+    color: ${theme.colors.secondary};
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color ${theme.transitionDurations.fast}
+    opacity: 0.5;
+    transition: opacity ${theme.transitionDurations.fast}
       ${theme.transitionTimingFunctions.ease};
 
     &:hover {
-      color: ${theme.colors.secondary};
+      opacity: 1;
     }
   `
 )

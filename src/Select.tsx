@@ -9,6 +9,7 @@ import { Label } from './Label'
 export type SelectProps = {
   hasValue?: boolean
   hasError?: boolean
+  small?: boolean
 } & React.InputHTMLAttributes<HTMLSelectElement>
 
 export type SelectFieldProps = { name: string } & SelectProps &
@@ -19,7 +20,7 @@ export type SelectFieldWithLabelProps = {
 } & SelectFieldProps
 
 const SelectElement = styled.select<SelectProps>(
-  ({ theme, hasValue, hasError }) => `
+  ({ theme, hasValue, hasError, small }) => `
   appearance: none;
   border: none;
   display: block;
@@ -80,6 +81,16 @@ const SelectElement = styled.select<SelectProps>(
       }
     }
   }
+
+  ${small &&
+    `
+      height: 36px;
+      min-height: 36px;
+      padding: 0px 32px 0 16px;
+      margin-right: 16px;
+      font-size: ${theme.fontSizes[0]};
+      line-height: ${theme.lineHeights[0]};
+    `}
 `
 )
 

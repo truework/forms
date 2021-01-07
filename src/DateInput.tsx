@@ -92,6 +92,31 @@ const DateInputSelect = styled.select<DateInputSelectProps>(
   `
 )
 
+const Clear = styled.button(
+  ({ theme }) => css`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 12px;
+    z-index: 1;
+    height: 16px;
+    width: 16px;
+    margin: auto 0;
+    border: 1px solid currentColor;
+    border-radius: 16px;
+    color: ${theme.colors.outline};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color ${theme.transitionDurations.fast}
+      ${theme.transitionTimingFunctions.ease};
+
+    &:hover {
+      color: ${theme.colors.secondary};
+    }
+  `
+)
+
 /**
  * IMPORTANT
  *
@@ -123,6 +148,7 @@ export function DateInput ({
   const [month, setMonth] = React.useState(initialMonth)
   const [day, setDay] = React.useState(initialDay)
   const [year, setYear] = React.useState(initialYear)
+  const hasValue = Boolean(month || day || year)
 
   const maxDaysInMonth = getLastDayOfMonth({
     year: year || 2020,
@@ -133,6 +159,12 @@ export function DateInput ({
     if (year && month && day)
       onUpdate(`${year}-${zeroPadDate(month)}-${zeroPadDate(day)}`)
   }, [month, day, year])
+
+  const clear = React.useCallback(() => {
+    setMonth(0)
+    setDay(0)
+    setYear(0)
+  }, [setMonth, setDay, setYear])
 
   return (
     <Box ml='-4px' mr='-4px' p='4px'>
@@ -224,6 +256,12 @@ export function DateInput ({
             </option>
           ))}
         </DateInputSelect>
+
+        {(month || day || year) && (
+          <Clear title='Clear' onClick={clear}>
+            <Icon name='X' width='12px' height='12px' />
+          </Clear>
+        )}
 
         <Box
           className='__bg'

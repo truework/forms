@@ -307,7 +307,11 @@ storiesOf('Formik', module).add('Basic', () => (
         dropdown: '',
         ssn: '123-45-1234'
       }}
-      onSubmit={values => alert(JSON.stringify(values, null, '  '))}
+      onSubmit={values => {
+        const val = JSON.stringify(values, null, '  ')
+        alert(val)
+        console.log(val)
+      }}
     >
       <Form>
         <Box mb='med'>

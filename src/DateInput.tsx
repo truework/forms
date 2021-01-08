@@ -158,8 +158,11 @@ export function DateInput ({
   })
 
   React.useEffect(() => {
-    if (year && month && day)
+    if (year && month && day) {
       onUpdate(`${year}-${zeroPadDate(month)}-${zeroPadDate(day)}`)
+    } else {
+      onUpdate('')
+    }
   }, [month, day, year])
 
   const clear = React.useCallback(() => {

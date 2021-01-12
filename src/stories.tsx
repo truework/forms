@@ -20,11 +20,7 @@ storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
     <Box mb='med'>
       <Label>Social Security Number</Label>
-      <SSNInput
-        value='123123123'
-        name='ssn'
-        placeholder='Enter your SSN here'
-      />
+      <SSNInput name='ssn' placeholder='Enter your SSN here' />
     </Box>
   </Gutter>
 ))
@@ -305,7 +301,7 @@ storiesOf('Formik', module).add('Basic', () => (
         toggle: '',
         date: '',
         dropdown: '',
-        ssn: '123-45-1234'
+        ssn: '***-**-1234'
       }}
       onSubmit={values => {
         const val = JSON.stringify(values, null, '  ')

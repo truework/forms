@@ -15,6 +15,7 @@ import { Toggle, ToggleField } from './Toggle'
 import { DateInput, DateInputFieldWithLabel } from './DateInput'
 import { Dropdown, DropdownFieldWithLabel } from './Dropdown'
 import { SSNInput, SSNInputFieldWithLabel } from './SSNInput'
+import { Tile, TileField } from './Tile'
 
 storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
@@ -314,6 +315,22 @@ storiesOf('Formik', module).add('Basic', () => (
       }}
     >
       <Form>
+        <Box mb='med' display='flex' mr='sm'>
+          <TileField name='tile'>
+            <Tile
+              value='mortgage'
+              icon={<Icon name='FileText' width='48px' height='48px' />}
+              description='Mortgage / Home Equity'
+            />
+            <Tile
+              value='background'
+              icon={<Icon name='FileText' width='48px' height='48px' />}
+              description='Background Check / Employment Screen'
+            />
+            <Tile value='other' description='Other' />
+          </TileField>
+        </Box>
+
         <Box mb='med'>
           <InputFieldWithLabel name='input' label='Input' placeholder='Input' />
         </Box>

@@ -23,70 +23,34 @@ export type SSNInputFieldProps = InputFieldProps & SSNProps
 export type SSNInputFieldWithLabelProps = InputFieldWithLabelProps & SSNProps
 
 export function SSNInput (props: SSNInputProps) {
-  const { value = '', masker = '*', separator = '-' } = props
-
-  // if initial value is masked, reset to empty string
-  const initialValue = new RegExp(`[^0-9${separator}]`).test(value)
-    ? ''
-    : clean(value, masker)
-  const formattedInitialValue = format(mask(initialValue, masker), separator)
+  const { value: initialValue = '', masker = '*', separator = '-' } = props
 
   const [raw, setRaw] = React.useState(initialValue)
-  const [formatted, setFormatted] = React.useState(formattedInitialValue)
+  const [active, setActive] = React.useState(false)
 
-  const onChange = React.useCallback(
-    e => {
-      e.persist()
+  const value = active ? raw : format(mask(raw, masker), separator)
 
-      const inputValue = e.target.value
-      const nextChar = inputValue.slice(-1)
-
-      // if a user types a letter, the last character is a formatting
-      // character, or we already have a full SSN, just ignore
-      if (
-        new RegExp(`[^0-9${separator}${masker}]`).test(nextChar) ||
-        inputValue.length > 11
-      )
-        return
-
-      const cleanedInputValue = clean(inputValue, masker) // masked, no - format
-      const rawSSN = clean(raw) // no formatting, just numbers
-
-      // if user deleted a character, remove, otherwise, append
-      const next =
-        cleanedInputValue.length < rawSSN.length
-          ? rawSSN.slice(0, cleanedInputValue.length)
-          : new RegExp(`[${separator}${masker}]`).test(nextChar)
-          ? rawSSN
-          : rawSSN + cleanedInputValue.slice(-1)
-
-      setRaw(next)
-      setFormatted(format(mask(next, masker), separator))
-    },
-    [raw, setRaw, formatted, setFormatted]
-  )
-
-  const resetCursor = React.useCallback(e => {
-    e.persist()
-
-    const len = e.target.value.length
-
-    e.target.setSelectionRange(len, len)
-  }, [])
+  const activate = React.useCallback(() => {
+    setActive(true)
+  }, [setActive])
+  const deactivate = React.useCallback(() => {
+    setActive(false)
+  }, [setActive])
 
   React.useEffect(() => {
-    props.onUpdate && props.onUpdate(raw)
-  }, [raw])
+    if (props.onUpdate) props.onUpdate(raw)
+  }, [raw, props.onUpdate])
 
   return (
     <Input
       {...props}
-      value={formatted}
-      onChange={onChange}
-      onFocus={resetCursor}
-      onKeyUp={resetCursor}
-      onKeyDown={resetCursor}
-      onClick={resetCursor}
+      value={value}
+      onFocus={activate}
+      onClick={activate}
+      onBlur={deactivate}
+      onChange={e => {
+        setRaw(clean(e.target.value))
+      }}
     />
   )
 }
@@ -101,14 +65,20 @@ export function SSNInputField ({
       {({ field, form }: FieldProps) => {
         const hasError = Boolean(get(form, ['errors', name]))
 
+        // must be memoized
+        const onUpdate = React.useCallback(
+          ssn => {
+            form.setFieldValue(name, ssn)
+          },
+          [name, form.setFieldValue]
+        )
+
         return (
           <SSNInput
             {...rest}
             {...field}
             hasError={hasError}
-            onUpdate={ssn => {
-              form.setFieldValue(name, ssn)
-            }}
+            onUpdate={onUpdate}
           />
         )
       }}

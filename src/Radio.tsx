@@ -28,7 +28,6 @@ const RadioItemLabel = styled.span(
     font-size: ${theme.fontSizes[1]};
     font-weight: ${theme.fontWeights[5]};
     line-height: ${theme.lineHeights[0]};
-    margin-bottom: ${theme.space.xxs};
     transition-property: color;
     transition-duration: ${theme.transitionDurations.fast};
     transition-timing-function: ${theme.transitionTimingFunctions.ease};
@@ -201,7 +200,13 @@ export function Radio ({
       >
         {label && <RadioItemLabel>{label}</RadioItemLabel>}
         {description && (
-          <P color='secondary' fontSize={0} fontWeight={4} lineHeight={0}>
+          <P
+            mt='xxs'
+            color='secondary'
+            fontSize={0}
+            fontWeight={4}
+            lineHeight={0}
+          >
             {description}
           </P>
         )}

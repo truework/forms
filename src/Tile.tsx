@@ -1,49 +1,51 @@
 import * as React from 'react'
-import { Box, Span, theme } from '@truework/ui'
+import { Span, Circle } from '@truework/ui'
 import styled from 'styled-components'
-import { Field, FieldConfig, FieldProps } from 'formik'
 
 export type TileProps = {
-  id: string
-  icon?: React.ReactElement
+  name: string
+  value: string
   label: string
+  icon?: React.ReactElement
+  hasError?: boolean
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-export type TileFieldProps = { name: string } & TileProps &
-  Pick<FieldConfig, 'validate'>
-
 const TileButton = styled.label`
-  width: 100%;
-  height: 100%;
-  position: relative;
   display: block;
+  position: relative;
   cursor: pointer;
 `
 
-const TileContent = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: ${theme.space.med} ${theme.space.sm};
-  top: 0px;
-  position: absolute;
+const TileContent = styled.div<Pick<TileProps, 'hasError'>>(
+  ({ theme, hasError }) => `
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 100%;
+  padding: ${theme.space.med} ${theme.space.sm};
   color: ${theme.colors.body};
   background-color: ${theme.colors.background};
-  border: 1px solid ${theme.colors.outline};
+  border: 1px solid ${hasError ? theme.colors.error : theme.colors.outline};
   border-radius: ${theme.space.xxs};
-
   transition-property: color, background-color, border-color;
   transition-duration: ${theme.transitionDurations.fast};
   transition-timing-function: ${theme.transitionTimingFunctions.ease};
 `
+)
 
-const Input = styled.input`
-  margin: 0;
+const Input = styled.input(
+  ({ theme }) => `
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
   padding: 0;
-  appearance: none;
+  overflow: hidden;
+  position: absolute;
+  whitespace: nowrap;
+  wordwrap: normal;
 
   &:checked
     ~ ${TileContent},
@@ -59,27 +61,22 @@ const Input = styled.input`
     color: ${theme.colors.primary};
   }
 `
+)
 
-export function Tile ({ id, icon, label, width, height, ...props }: TileProps) {
+export function Tile ({ icon, label, hasError, ...props }: TileProps) {
+  const id = props.name + props.value
+
   return (
     <TileButton htmlFor={id}>
       <Input id={id} type='radio' {...props} />
 
-      <TileContent>
+      <TileContent hasError={hasError}>
         {icon && (
-          <Box
-            mb='xs'
-            backgroundColor='white'
-            width='48px'
-            height='48px'
-            borderRadius='50%'
-            display='flex'
-            justifyContent='center'
-            alignItems='center'
-          >
+          <Circle mb='xs' background='white' width='48px' height='48px'>
             {icon}
-          </Box>
+          </Circle>
         )}
+
         <Span
           display='flex'
           alignItems='center'
@@ -92,34 +89,5 @@ export function Tile ({ id, icon, label, width, height, ...props }: TileProps) {
         </Span>
       </TileContent>
     </TileButton>
-  )
-}
-
-export function TileField ({
-  name,
-  validate,
-  onChange,
-  onBlur,
-  ...rest
-}: TileFieldProps) {
-  return (
-    <Field name={name} validate={validate}>
-      {({ field }: FieldProps) => {
-        return (
-          <Tile
-            {...rest}
-            {...field}
-            onChange={e => {
-              field.onChange(e)
-              if (onChange) onChange(e)
-            }}
-            onBlur={e => {
-              field.onBlur(e)
-              if (onBlur) onBlur(e)
-            }}
-          />
-        )
-      }}
-    </Field>
   )
 }

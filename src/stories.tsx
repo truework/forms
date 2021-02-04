@@ -1,7 +1,16 @@
 /* eslint-disable */
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Box, Span, Gutter, Icon, H5, Button } from '@truework/ui'
+import {
+  Box,
+  Span,
+  Gutter,
+  Icon,
+  H5,
+  Button,
+  GridRow,
+  GridItem
+} from '@truework/ui'
 import { Formik, Form } from 'formik'
 
 import { Label } from './Label'
@@ -15,6 +24,7 @@ import { Toggle, ToggleField } from './Toggle'
 import { DateInput, DateInputFieldWithLabel } from './DateInput'
 import { Dropdown, DropdownFieldWithLabel } from './Dropdown'
 import { SSNInput, SSNInputFieldWithLabel } from './SSNInput'
+import { Tile, TileField } from './Tile'
 
 storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
@@ -289,6 +299,63 @@ storiesOf('Base', module).add('Dropdown', () => (
   </Gutter>
 ))
 
+storiesOf('Base', module).add('Tile', () => (
+  <Gutter withVertical>
+    <Box width='500px' mb='sm'>
+      <GridRow gutter='sm'>
+        {[
+          { id: 'tile-1', icon: 'FileText', label: 'Mortgage / Home Equity' },
+          {
+            id: 'tile-2',
+            icon: 'X',
+            label: 'Background Check / Employment Screen'
+          },
+          { id: 'tile-3', icon: 'FileText', label: 'Tenant Screening' }
+        ].map(t => (
+          <GridItem width={[1, 1 / 3]}>
+            <Box width='152px' height='136px'>
+              <Tile
+                name='tile'
+                id={t.id}
+                icon={
+                  <Icon name={t.icon} width='32px' height='32px' color='body' />
+                }
+                label={t.label}
+              />
+            </Box>
+          </GridItem>
+        ))}
+      </GridRow>
+    </Box>
+    <Box width='500px' mb='med'>
+      <GridRow gutter='sm'>
+        {[
+          { id: 'tile-4', icon: 'X', label: 'Government / Social Services' },
+          { id: 'tile-5', icon: 'FileText', label: 'Auto Lender' },
+          {
+            id: 'tile-6',
+            icon: 'X',
+            label: 'Personal Loans or Consumer Lending'
+          }
+        ].map(t => (
+          <GridItem width={[1, 1 / 3]}>
+            <Box width='152px' height='136px'>
+              <Tile
+                name='tile'
+                id={t.id}
+                icon={
+                  <Icon name={t.icon} width='32px' height='32px' color='body' />
+                }
+                label={t.label}
+              />
+            </Box>
+          </GridItem>
+        ))}
+      </GridRow>
+    </Box>
+  </Gutter>
+))
+
 storiesOf('Formik', module).add('Basic', () => (
   <Gutter withVertical>
     <Formik
@@ -431,6 +498,17 @@ storiesOf('Formik', module).add('Basic', () => (
           <Box ml='sm'>
             <InputField small name='search' placeholder='Search' />
           </Box>
+        </Box>
+
+        <Box width='152px' height='136px' mb='med'>
+          <TileField
+            name='tile'
+            id='tile-1'
+            icon={
+              <Icon name='FileText' width='32px' height='32px' color='body' />
+            }
+            label='Tile'
+          />
         </Box>
 
         <Box mb='med'>

@@ -11,7 +11,8 @@ import {
   GridRow,
   GridItem
 } from '@truework/ui'
-import { Formik, Form } from 'formik'
+import { Formik, Form, Field, FieldProps } from 'formik'
+import { get } from 'lodash'
 
 import { Label } from './Label'
 import { SubGroup } from './SubGroup'
@@ -24,7 +25,8 @@ import { Toggle, ToggleField } from './Toggle'
 import { DateInput, DateInputFieldWithLabel } from './DateInput'
 import { Dropdown, DropdownFieldWithLabel } from './Dropdown'
 import { SSNInput, SSNInputFieldWithLabel } from './SSNInput'
-import { Tile, TileField } from './Tile'
+import { Tile } from './Tile'
+import { ErrorMessage } from './ErrorMessage'
 
 storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
@@ -301,52 +303,36 @@ storiesOf('Base', module).add('Dropdown', () => (
 
 storiesOf('Base', module).add('Tile', () => (
   <Gutter withVertical>
-    <Box width='500px' mb='sm'>
-      <GridRow gutter='sm'>
+    <Box width='500px'>
+      <GridRow flexWrap='wrap' gutter='sm'>
         {[
-          { id: 'tile-1', icon: 'FileText', label: 'Mortgage / Home Equity' },
+          { value: 'a', icon: 'FileText', label: 'Mortgage / Home Equity' },
           {
-            id: 'tile-2',
+            value: 'b',
             icon: 'X',
             label: 'Background Check / Employment Screen'
           },
-          { id: 'tile-3', icon: 'FileText', label: 'Tenant Screening' }
-        ].map(t => (
-          <GridItem width={[1, 1 / 3]}>
-            <Box width='152px' height='136px'>
-              <Tile
-                name='tile'
-                id={t.id}
-                icon={
-                  <Icon name={t.icon} width='32px' height='32px' color='body' />
-                }
-                label={t.label}
-              />
-            </Box>
-          </GridItem>
-        ))}
-      </GridRow>
-    </Box>
-    <Box width='500px' mb='med'>
-      <GridRow gutter='sm'>
-        {[
-          { id: 'tile-4', icon: 'X', label: 'Government / Social Services' },
-          { id: 'tile-5', icon: 'FileText', label: 'Auto Lender' },
+          { value: 'c', icon: 'FileText', label: 'Tenant Screening' },
+          { value: 'd', icon: 'X', label: 'Government / Social Services' },
+          { value: 'e', icon: 'FileText', label: 'Auto Lender' },
           {
-            id: 'tile-6',
+            value: 'f',
             icon: 'X',
             label: 'Personal Loans or Consumer Lending'
           }
         ].map(t => (
-          <GridItem width={[1, 1 / 3]}>
-            <Box width='152px' height='136px'>
+          <GridItem key={t.value} width={[1, 1 / 2, 1 / 3]}>
+            <Box mb='sm'>
               <Tile
                 name='tile'
-                id={t.id}
+                value={t.value}
+                label={t.label}
                 icon={
                   <Icon name={t.icon} width='32px' height='32px' color='body' />
                 }
-                label={t.label}
+                onChange={e => {
+                  console.log(e.target.value)
+                }}
               />
             </Box>
           </GridItem>
@@ -368,7 +354,8 @@ storiesOf('Formik', module).add('Basic', () => (
         toggle: '',
         date: '',
         dropdown: '',
-        ssn: '***-**-1234'
+        ssn: '***-**-1234',
+        tile_field: ''
       }}
       onSubmit={values => {
         const val = JSON.stringify(values, null, '  ')
@@ -500,15 +487,59 @@ storiesOf('Formik', module).add('Basic', () => (
           </Box>
         </Box>
 
-        <Box width='152px' height='136px' mb='med'>
-          <TileField
-            name='tile'
-            id='tile-1'
-            icon={
-              <Icon name='FileText' width='32px' height='32px' color='body' />
-            }
-            label='Tile'
-          />
+        <Box mb='med'>
+          <Field
+            name='tile_field'
+            validate={(str: string) => {
+              return str ? undefined : 'Required'
+            }}
+          >
+            {({ field, form }: FieldProps) => {
+              const hasError = Boolean(get(form, ['errors', 'tile_field']))
+
+              return (
+                <GridRow flexWrap='wrap' gutter='sm'>
+                  {[
+                    {
+                      value: 'mortgage',
+                      icon: 'FileText',
+                      label: 'Mortgage / Home Equity'
+                    },
+                    {
+                      value: 'background-check',
+                      icon: 'X',
+                      label: 'Background Check / Employment Screen'
+                    },
+                    {
+                      value: 'tenant',
+                      icon: 'FileText',
+                      label: 'Tenant Screening'
+                    }
+                  ].map(t => (
+                    <GridItem key={t.value} width={[1, 1 / 2, 1 / 3]}>
+                      <Tile
+                        name='tile_field'
+                        value={t.value}
+                        label={t.label}
+                        icon={
+                          <Icon
+                            name={t.icon}
+                            width='32px'
+                            height='32px'
+                            color='body'
+                          />
+                        }
+                        hasError={hasError}
+                        onChange={field.onChange}
+                        onBlur={field.onBlur}
+                      />
+                    </GridItem>
+                  ))}
+                </GridRow>
+              )
+            }}
+          </Field>
+          <ErrorMessage name='tile_field' />
         </Box>
 
         <Box mb='med'>

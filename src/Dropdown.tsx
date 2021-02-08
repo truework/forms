@@ -265,11 +265,21 @@ export function Dropdown ({
   onSelect,
   onRemove
 }: DropdownProps) {
-  const [cta, ctaSet] = React.useState(
-    get(items.filter(i => i.value === value)[0], 'label') ||
+  // computed on first render and only updated when value/items changes
+  const computedCTA = React.useMemo(() => {
+    return (
+      get(items.filter(i => i.value === value)[0], 'label') ||
       placeholder ||
       'Please select'
-  )
+    )
+  }, [value, items, placeholder])
+
+  const [cta, ctaSet] = React.useState(computedCTA)
+
+  // will only call ctaSet if computedCTA changes
+  React.useEffect(() => {
+    ctaSet(computedCTA)
+  }, [computedCTA])
 
   const {
     id,
@@ -287,7 +297,7 @@ export function Dropdown ({
       if (onSelect) onSelect(item)
     },
     onRemove (item) {
-      ctaSet('Please select')
+      ctaSet(placeholder || 'Please select')
       if (onRemove) onRemove(item)
     }
   })

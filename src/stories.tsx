@@ -264,42 +264,57 @@ storiesOf('Base', module).add('DateInput', () => (
   </Gutter>
 ))
 
-storiesOf('Base', module).add('Dropdown', () => (
-  <Gutter withVertical>
-    <Box mb='med'>
-      <Label>Dropdown</Label>
-      <Dropdown
-        items={[
-          { value: 'one', label: 'One' },
-          { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' }
-        ]}
-      />
-    </Box>
-    <Box mb='med'>
-      <Label>Dropdown Disabled</Label>
-      <Dropdown
-        disabled
-        items={[
-          { value: 'one', label: 'One' },
-          { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' }
-        ]}
-      />
-    </Box>
-    <Box mb='med'>
-      <Label>Dropdown Error</Label>
-      <Dropdown
-        hasError
-        items={[
-          { value: 'one', label: 'One' },
-          { value: 'two', label: 'Two' },
-          { value: 'three', label: 'Three' }
-        ]}
-      />
-    </Box>
-  </Gutter>
-))
+storiesOf('Base', module).add('Dropdown', () => {
+  const [value, setValue] = React.useState('')
+
+  return (
+    <Gutter withVertical>
+      <Box mb='sm'>
+        <Label>Dropdown A</Label>
+        <Dropdown
+          value={value}
+          onSelect={item => setValue(item.value)}
+          items={[
+            { value: 'one', label: 'One' },
+            { value: 'two', label: 'Two' },
+            { value: 'three', label: 'Three' }
+          ]}
+        />
+      </Box>
+      <Button
+        mb='med'
+        size='small'
+        appearance='secondary'
+        onClick={() => setValue('')}
+      >
+        Clear Dropdown A
+      </Button>
+
+      <Box mb='med'>
+        <Label>Dropdown Disabled</Label>
+        <Dropdown
+          disabled
+          items={[
+            { value: 'one', label: 'One' },
+            { value: 'two', label: 'Two' },
+            { value: 'three', label: 'Three' }
+          ]}
+        />
+      </Box>
+      <Box mb='med'>
+        <Label>Dropdown Error</Label>
+        <Dropdown
+          hasError
+          items={[
+            { value: 'one', label: 'One' },
+            { value: 'two', label: 'Two' },
+            { value: 'three', label: 'Three' }
+          ]}
+        />
+      </Box>
+    </Gutter>
+  )
+})
 
 storiesOf('Base', module).add('Tile', () => (
   <Gutter withVertical>

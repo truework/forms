@@ -255,6 +255,22 @@ export const Control = React.forwardRef(
 
 Control.displayName = 'Control'
 
+function getCTA ({
+  items,
+  value,
+  placeholder
+}: {
+  items: DropdownProps['items']
+  value: DropdownProps['value']
+  placeholder: DropdownProps['placeholder']
+}) {
+  return (
+    get(items.filter(i => i.value === value)[0], 'label') ||
+    placeholder ||
+    'Please select'
+  )
+}
+
 export function Dropdown ({
   value,
   placeholder,
@@ -265,21 +281,12 @@ export function Dropdown ({
   onSelect,
   onRemove
 }: DropdownProps) {
-  // computed on first render and only updated when value/items changes
-  const computedCTA = React.useMemo(() => {
-    return (
-      get(items.filter(i => i.value === value)[0], 'label') ||
-      placeholder ||
-      'Please select'
-    )
-  }, [value, items, placeholder])
-
-  const [cta, ctaSet] = React.useState(computedCTA)
+  const [cta, ctaSet] = React.useState(getCTA({ items, value, placeholder }))
 
   // will only call ctaSet if computedCTA changes
   React.useEffect(() => {
-    ctaSet(computedCTA)
-  }, [computedCTA])
+    ctaSet(getCTA({ items, value, placeholder }))
+  }, [items, value, placeholder])
 
   const {
     id,

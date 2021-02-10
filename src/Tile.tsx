@@ -54,7 +54,7 @@ const Input = styled.input(
     &:focus
     ~ ${TileContent} {
     border: 1px solid ${theme.colors.primary};
-    background-color: rgb(91, 99, 254, 0.1);
+    background-color: rgba(91, 99, 254, 0.1);
   }
 
   &:checked ~ ${TileContent} {
@@ -79,11 +79,12 @@ export function Tile ({ icon, label, hasError, ...props }: TileProps) {
 
         <Span
           display='flex'
-          alignItems='center'
+          justifyContent='center'
           minHeight='32px'
           fontSize={0}
           fontWeight={5}
           lineHeight={0}
+          width='100%'
         >
           {label}
         </Span>

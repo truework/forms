@@ -172,7 +172,7 @@ export function DateInput ({
   }, [setMonth, setDay, setYear])
 
   return (
-    <Box ml='-4px' mr='-4px' p='4px'>
+    <Box ml='-2px' mr='-2px' p='2px'>
       <Box display='flex' alignItems='center' height='48px' pl='56px'>
         <DateInputSelect
           ref={monthRef}
@@ -272,10 +272,10 @@ export function DateInput ({
           className='__bg'
           bg={hasError ? 'error-alpha01' : 'primary-alpha01'}
           position='absolute'
-          top='-4px'
-          bottom='-4px'
-          left='-4px'
-          right='-4px'
+          top='-2px'
+          bottom='-2px'
+          left='-2px'
+          right='-2px'
           zIndex={0}
           borderRadius='6px'
           opacity={0}

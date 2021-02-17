@@ -49,7 +49,12 @@ export function SSNInput (props: SSNInputProps) {
       onClick={activate}
       onBlur={deactivate}
       onChange={e => {
-        setRaw(clean(e.target.value))
+        const val = e.target.value
+
+        // clear on any change IF raw value (from API etc) has been masked
+        const shouldClear = /\*\*/.test(val)
+
+        setRaw(shouldClear ? '' : clean(val))
       }}
     />
   )

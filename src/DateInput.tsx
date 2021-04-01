@@ -144,13 +144,9 @@ export function DateInput ({
   hasError,
   onUpdate
 }: DateInputProps) {
-  const monthRef = React.useRef<HTMLSelectElement>(null)
-  const dayRef = React.useRef<HTMLSelectElement>(null)
-  const yearRef = React.useRef<HTMLSelectElement>(null)
   const [month, setMonth] = React.useState(initialMonth)
   const [day, setDay] = React.useState(initialDay)
   const [year, setYear] = React.useState(initialYear)
-  const hasValue = Boolean(month || day || year)
 
   const maxDaysInMonth = getLastDayOfMonth({
     year: year || 2020,
@@ -175,13 +171,11 @@ export function DateInput ({
     <Box ml='-2px' mr='-2px' p='2px'>
       <Box display='flex' alignItems='center' height='48px' pl='56px'>
         <DateInputSelect
-          ref={monthRef}
           name={`${name}-month`}
           value={month}
           disabled={disabled}
           onChange={e => {
             setMonth(parseInt(e.target.value, 10))
-            if (dayRef.current) dayRef.current.focus()
           }}
           aria-label={`${label}: Month`}
           hasValue={Boolean(month)}
@@ -207,13 +201,11 @@ export function DateInput ({
           transform='rotate(10deg)'
         />
         <DateInputSelect
-          ref={dayRef}
           name={`${name}-day`}
           value={day}
           disabled={disabled}
           onChange={e => {
             setDay(parseInt(e.target.value, 10))
-            if (yearRef.current) yearRef.current.focus()
           }}
           aria-label={`${label}: Day`}
           hasValue={Boolean(day)}
@@ -241,7 +233,6 @@ export function DateInput ({
           transform='rotate(10deg)'
         />
         <DateInputSelect
-          ref={yearRef}
           name={`${name}-year`}
           value={year}
           disabled={disabled}

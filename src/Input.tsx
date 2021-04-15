@@ -34,9 +34,10 @@ const InputElement = styled.input<InputProps>(
   line-height: ${theme.lineHeights[0]};
   letter-spacing: 0.6px;
   width: 100%;
-  margin: 0;
-  min-height: ${small ? '36px' : '48px'};
-  padding: ${small ? '10px 16px' : theme.space.sm};
+  margin: 1px;
+  border-radius: 4px;
+  min-height: ${small ? '34px' : '46px'};
+  padding: ${small ? '10px 16px' : '14px 16px'};
   background: transparent;
   color: ${hasValue ? theme.colors.body : theme.colors.secondary};
   cursor: pointer;
@@ -67,7 +68,6 @@ const InputElement = styled.input<InputProps>(
   &:not(:disabled):active,
   &:not(:disabled):focus,
   &:not(:disabled):hover {
-    box-shadow: none;
     outline: 0;
     color: ${theme.colors.body};
 

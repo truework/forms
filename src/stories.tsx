@@ -41,7 +41,7 @@ storiesOf('Base', module).add('Input', () => (
   <Gutter withVertical>
     <Box mb='med'>
       <Label>Input</Label>
-      <Input name='a' placeholder='Input' />
+      <Input name='email' placeholder='Email' />
     </Box>
     <SubGroup>
       <Box mb='med'>

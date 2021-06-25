@@ -32,7 +32,7 @@ storiesOf('Base', module).add('SSN', () => (
   <Gutter withVertical>
     <Box mb='med'>
       <Label>Social Security Number</Label>
-      <SSNInput name='ssn' placeholder='Enter your SSN here' />
+      <SSNInput id='ssn' placeholder='Enter your SSN here' />
     </Box>
   </Gutter>
 ))
@@ -41,17 +41,17 @@ storiesOf('Base', module).add('Input', () => (
   <Gutter withVertical>
     <Box mb='med'>
       <Label>Input</Label>
-      <Input name='email' placeholder='Email' />
+      <Input id='email' placeholder='Email' />
     </Box>
     <SubGroup>
       <Box mb='med'>
         <Label>Input</Label>
-        <Input name='a' placeholder='Input' preTab={<Icon name='FileText' />} />
+        <Input id='a' placeholder='Input' preTab={<Icon name='FileText' />} />
       </Box>
       <Box mb='med'>
         <Label>Input</Label>
         <Input
-          name='a'
+          id='a'
           placeholder='Input'
           postTab={<Icon name='FileText' />}
         />
@@ -60,19 +60,19 @@ storiesOf('Base', module).add('Input', () => (
     <Box mb='med'>
       <Label>Input</Label>
       <Input
-        name='a'
+        id='a'
         placeholder='email'
         postTab={<Span fontSize={1}>@truework.com</Span>}
       />
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
-      <Input name='a' placeholder='Input' disabled />
+      <Input id='a' placeholder='Input' disabled />
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
       <Input
-        name='a'
+        id='a'
         placeholder='Input'
         preTab={<Icon name='FileText' />}
         disabled
@@ -80,12 +80,12 @@ storiesOf('Base', module).add('Input', () => (
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
-      <Input name='a' placeholder='Input' hasError />
+      <Input id='a' placeholder='Input' hasError />
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
       <Input
-        name='a'
+        id='a'
         placeholder='Input'
         preTab={<Icon name='FileText' />}
         hasError
@@ -93,12 +93,12 @@ storiesOf('Base', module).add('Input', () => (
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
-      <Input name='a' placeholder='Input' small />
+      <Input id='a' placeholder='Input' small />
     </Box>
     <Box mb='med'>
       <Label>Input</Label>
       <Input
-        name='a'
+        id='a'
         placeholder='Input'
         preTab={<Icon name='FileText' />}
         small
@@ -380,7 +380,7 @@ storiesOf('Formik', module).add('Basic', () => (
     >
       <Form>
         <Box mb='med'>
-          <InputFieldWithLabel name='input' label='Input' placeholder='Input' />
+          <InputFieldWithLabel id='input' label='Input' placeholder='Input' />
         </Box>
         <Box mb='med'>
           <TextareaFieldWithLabel
@@ -392,13 +392,13 @@ storiesOf('Formik', module).add('Basic', () => (
         <Box mb='med'>
           <SSNInputFieldWithLabel
             label='Social Security Number'
-            name='ssn'
+            id='ssn'
             placeholder='Enter your SSN here'
           />
         </Box>
         <Box mb='med'>
           <SelectFieldWithLabel
-            name='select'
+            id='select'
             label='Select'
             placeholder='Please select'
             validate={val => {
@@ -480,7 +480,7 @@ storiesOf('Formik', module).add('Basic', () => (
         <Box mb='med' display='flex'>
           <SelectField
             small
-            name='select'
+            id='select'
             placeholder='Filter'
             validate={val => {
               return !val ? 'Required' : undefined
@@ -498,7 +498,7 @@ storiesOf('Formik', module).add('Basic', () => (
           </SelectField>
 
           <Box ml='sm'>
-            <InputField small name='search' placeholder='Search' />
+            <InputField small id='search' placeholder='Search' />
           </Box>
         </Box>
 

@@ -3,6 +3,7 @@
     "noErrorTruncation": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "jsx": "react"
+    "jsx": "react",
+    "esModuleInterop": true
   }
 }

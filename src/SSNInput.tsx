@@ -61,25 +61,26 @@ export function SSNInput (props: SSNInputProps) {
 }
 
 export function SSNInputField ({
-  name,
+  id,
   validate,
   ...rest
 }: SSNInputFieldProps) {
   return (
-    <Field name={name} validate={validate}>
+    <Field name={id} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]))
+        const hasError = Boolean(get(form, ['errors', id]))
 
         // must be memoized
         const onUpdate = React.useCallback(
           ssn => {
-            form.setFieldValue(name, ssn)
+            form.setFieldValue(id, ssn)
           },
           [name, form.setFieldValue]
         )
 
         return (
           <SSNInput
+            id={id}
             {...rest}
             {...field}
             hasError={hasError}
@@ -94,7 +95,7 @@ export function SSNInputField ({
 export function SSNInputFieldWithLabel (props: SSNInputFieldWithLabelProps) {
   return (
     <>
-      <Label htmlFor={props.name}>{props.label}</Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <SSNInputField {...props} />
     </>
   )

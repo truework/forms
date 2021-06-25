@@ -25,7 +25,7 @@ export type DateInputSelectProps = {
 }
 
 export type DateInputProps = {
-  name: string
+  id: string
   label: string // required for a11y
   hasError?: boolean
   onUpdate(date: string): void
@@ -318,28 +318,28 @@ export function DateInput ({
 }
 
 export function DateInputField ({
-  name,
+  id,
   validate,
   ...rest
 }: DateInputFieldProps) {
   return (
-    <Field name={name} validate={validate}>
+    <Field name={id} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]))
+        const hasError = Boolean(get(form, ['errors', id]))
         const [year = '', month = '', day = '']: string[] = (
           field.value || ''
         ).split('-')
 
         return (
           <DateInput
-            name={name}
+            id={id}
             {...rest}
             initialMonth={month ? parseInt(month, 10) : undefined}
             initialDay={day ? parseInt(day, 10) : undefined}
             initialYear={year ? parseInt(year, 10) : undefined}
             hasError={hasError}
             onUpdate={date => {
-              form.setFieldValue(name, date)
+              form.setFieldValue(id, date)
             }}
           />
         )
@@ -353,7 +353,7 @@ export function DateInputFieldWithLabel (
 ) {
   return (
     <>
-      <Label htmlFor={props.name}>{props.label}</Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <DateInputField {...props} />
     </>
   )

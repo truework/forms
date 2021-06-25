@@ -7,7 +7,8 @@ import { Box } from '@truework/ui'
 import { Label } from './Label'
 
 export type InputProps = {
-  name: string
+  id: string
+  name?: string
   label?: string
   small?: boolean
   preTab?: React.ReactNode
@@ -174,19 +175,20 @@ export const Input = React.forwardRef(
 )
 
 export function InputField ({
-  name,
+  id,
   validate,
   onChange,
   onBlur,
   ...rest
 }: InputFieldProps) {
   return (
-    <Field name={name} validate={validate}>
+    <Field name={id} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]))
+        const hasError = Boolean(get(form, ['errors', id]))
 
         return (
           <Input
+            id={id}
             {...rest}
             {...field}
             hasError={hasError}
@@ -208,7 +210,7 @@ export function InputField ({
 export function InputFieldWithLabel (props: InputFieldWithLabelProps) {
   return (
     <>
-      <Label htmlFor={props.name}>{props.label}</Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <InputField {...props} />
     </>
   )

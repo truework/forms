@@ -12,7 +12,7 @@ export type SelectProps = {
   small?: boolean
 } & React.InputHTMLAttributes<HTMLSelectElement>
 
-export type SelectFieldProps = { name: string } & SelectProps &
+export type SelectFieldProps = { id: string } & SelectProps &
   Pick<FieldConfig, 'validate'>
 
 export type SelectFieldWithLabelProps = {
@@ -169,16 +169,16 @@ export const Select = React.forwardRef(
 )
 
 export function SelectField ({
-  name,
+  id,
   validate,
   onChange,
   onBlur,
   ...rest
 }: SelectFieldProps) {
   return (
-    <Field name={name} validate={validate}>
+    <Field name={id} validate={validate}>
       {({ field, form }: FieldProps) => {
-        const hasError = Boolean(get(form, ['errors', name]))
+        const hasError = Boolean(get(form, ['errors', id]))
 
         return (
           <Select
@@ -203,7 +203,7 @@ export function SelectField ({
 export function SelectFieldWithLabel (props: SelectFieldWithLabelProps) {
   return (
     <>
-      <Label htmlFor={props.name}>{props.label}</Label>
+      <Label htmlFor={props.id}>{props.label}</Label>
       <SelectField {...props} />
     </>
   )
